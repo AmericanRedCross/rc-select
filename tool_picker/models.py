@@ -89,4 +89,12 @@ class Tool(models.Model):
         return self.name
 
 class Testimonial(models.Model):
+    # specify options for use_type field
+    use_type_choices = (
+        ('emergency-response', 'Emergency Response'),
+        ('non-emergency', 'Project'),
+    )
+    
+    use_type = models.CharField(max_length=50, choices=use_type_choices)
+    related_emergency_name = models.CharField(max_length=200, default="No emergency specified.", null=True)
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
