@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>RC Select</title>
+
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Jonathan Garro, American Red Cross">
+    <meta name="description" content="RC Select">
+
+    <!-- Dark mode -->
+    <script>
+        const storedTheme = localStorage.getItem('theme')
+ 
+        const getPreferredTheme = () => {
+            if (storedTheme) {
+                return storedTheme
+            }
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'light'
+        }
+
+        const setTheme = function (theme) {
+            if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-bs-theme', 'dark')
+            } else {
+                document.documentElement.setAttribute('data-bs-theme', theme)
+            }
+        }
+
+        setTheme(getPreferredTheme())
+
+        window.addEventListener('DOMContentLoaded', () => {
+            var el = document.querySelector('.theme-icon-active');
+            if(el != 'undefined' && el != null) {
+                const showActiveTheme = theme => {
+                const activeThemeIcon = document.querySelector('.theme-icon-active use')
+                const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+                const svgOfActiveBtn = btnToActive.querySelector('.mode-switch use').getAttribute('href')
+
+                document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+                    element.classList.remove('active')
+                })
+
+                btnToActive.classList.add('active')
+                activeThemeIcon.setAttribute('href', svgOfActiveBtn)
+            }
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                if (storedTheme !== 'light' || storedTheme !== 'dark') {
+                    setTheme(getPreferredTheme())
+                }
+            })
+
+            showActiveTheme(getPreferredTheme())
+
+            document.querySelectorAll('[data-bs-theme-value]')
+                .forEach(toggle => {
+                    toggle.addEventListener('click', () => {
+                        const theme = toggle.getAttribute('data-bs-theme-value')
+                        localStorage.setItem('theme', theme)
+                        setTheme(theme)
+                        showActiveTheme(theme)
+                    })
+                })
+
+            }
+        })
+        
+    </script>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="">
+    
+    <!-- Custom JQuery -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap">
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/assets/vendor/font-awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/assets/vendor/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/static/assets/vendor/tiny-slider/tiny-slider.css">
+    <link rel="stylesheet" type="text/css" href="/static/assets/vendor/glightbox/css/glightbox.css">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/assets/css/style.css">
+
+</head>
+
+<body>
+
+<!-- Header START -->
+<header class="navbar-light navbar-sticky">
+    <!-- Logo Nav START -->
+    <nav class="navbar navbar-expand-xl">
+        <div class="container">
+            <!-- Logo START -->
+            <a class="navbar-brand" href="/">
+                <img class="light-mode-item navbar-brand-item" src="/static/assets/images/logo.svg" alt="logo">
+                <img class="dark-mode-item navbar-brand-item" src="/static/assets/images/logo-light.svg" alt="logo">
+            </a>
+            <!-- Logo END -->
+    
+            <!-- Responsive navbar toggler -->
+            <button class="navbar-toggler ms-sm-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-animation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
+    
+            <!-- Main navbar START -->
+            <div class="navbar-collapse collapse" id="navbarCollapse">
+
+
+                <!-- Nav Main menu START -->
+                <ul class="navbar-nav navbar-nav-scroll ms-auto">
+                    <!-- Nav item 1 Demos -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="demoMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Toolbox</a>
+                        <ul class="dropdown-menu" aria-labelledby="demoMenu">
+                            <li> <a class="dropdown-item active" href="#">View All</a></li>
+                            <li> <a class="dropdown-item" href="/tool">Red Rose</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Nav item 2 Course -->
+                    <li class="nav-item dropdown"><a class="nav-link" href="/tool_selection/">Help Me Choose</a></li>
+
+                    <!-- Nav item 3 Components -->
+                    <li class="nav-item"><a class="nav-link" href="tool_picker/about">About</a></li>
+                </ul>
+                <!-- Nav Main menu END -->
+            </div>
+            <!-- Main navbar END -->
+
+
+        
+        </div>
+    </nav>
+    <!-- Logo Nav END -->
+</header>
+<!-- Header END -->
+
+<div class="container">
+    <!-- Flash messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<main>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+<!-- =======================
+Footer START -->
+
+<footer class="pt-5 mt-6">
+    <div class="container">
+        <!-- Row START -->
+        <div class="row g-4 justify-content-between">
+
+            <!-- Widget 1 START -->
+            <div class="col-md-5 col-lg-4">
+                <p class="my-3">Subscribe for updates to the RC Select tool</p>
+                <!-- Newsletter -->
+                <form class="row row-cols-lg-auto g-2">
+                    <div class="col-12">
+                        <input type="email" class="form-control" placeholder="Enter your email address">
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-dark m-0">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Widget 1 END -->
+
+            <!-- Widget 2 START -->
+            <div class="col-md-7 col-lg-6">
+                <div class="row g-4 g-lg-5">
+                    <!-- Link block -->
+                    <div class="col-6 col-sm-4">
+
+                    </div>
+
+                    <!-- Link block -->
+                    <div class="col-6 col-sm-4">
+                        <h5 class="mb-2 mb-md-3">Resources</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link pt-0" href="/admin">Administrator Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://github.com/JonathanGarro/rc-select">Source Code</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Site Status</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Link block -->
+                    <div class="col-6 col-sm-4">
+                        <h5 class="mb-2 mb-md-3">Connect with IFRC</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link pt-0" href="#">GO Platform</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Cash Hub</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">IFRC Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">SMCC</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Widget 2 END -->
+
+        </div><!-- Row END -->
+
+        <hr> <!-- Divider -->
+
+        <!-- Bottom footer -->
+        <div class="row">
+            <div class="col-12">
+                <div class="d-md-flex justify-content-between align-items-center pt-2 pb-4 text-center">
+                    <!-- copyright text -->
+                    <div class="text-primary-hover"> RC Select has been crafted with ♥ by <a href="https://www.github.com/JonathanGarro" target="_blank" class="text-reset">Jonathan Garro</a>, American Red Cross</div>
+                    
+                    <!-- copyright links-->
+                    <div class="nav justify-content-center mt-3 mt-md-0">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item"><a class="nav-link" href="#">Terms of use</a></li>
+                            <li class="list-inline-item"><a class="nav-link" href="#">Privacy policy</a></li>
+                            <li class="list-inline-item pe-0"><a class="nav-link" href="#">Cookies</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- =======================
+Footer END -->
+
+<!-- Back to top -->
+<div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i></div>
+
+<!-- Bootstrap JS -->
+<script src="/static/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Vendors -->
+<script src="/static/assets/vendor/tiny-slider/tiny-slider.js"></script>
+<script src="/static/assets/vendor/glightbox/js/glightbox.js"></script>
+
+<!-- Template Functions -->
+<script src="/static/assets/js/functions.js"></script>
+</body>
+</html>
