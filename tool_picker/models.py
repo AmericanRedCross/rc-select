@@ -1,7 +1,23 @@
+import datetime
+import secrets
+
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 from django.utils import timezone
+
+class ToolAttributeDefinition(models.Model):
+    default_def = "Not specified."
+    
+    # cost
+    cost_def = models.TextField(default=default_def, null=True)
+    cost1 = models.TextField(default=default_def, null=True)
+    cost2 = models.TextField(default=default_def, null=True)
+    cost3 = models.TextField(default=default_def, null=True)
+    cost4 = models.TextField(default=default_def, null=True)
+    
+    date_added = models.DateTimeField(default=timezone.now)
+    date_modified = models.DateTimeField(auto_now=True)
 
 class Tool(models.Model):
     name = models.CharField(max_length=100)
@@ -82,6 +98,11 @@ class Tool(models.Model):
             MaxValueValidator(4, message="Data security cannot be greater than 4"),
         ])
     data_security_desc = models.TextField(default="No description provided.")
+    cost = models.IntegerField(default=0, validators=[
+        MinValueValidator(0, message="Cost cannot be less than 0"),
+        MaxValueValidator(4, message="Cost cannot be greater than 4"),
+        ])
+    cost_desc = models.TextField(default="No description provided.")
     date_added = models.DateTimeField(default=timezone.now)
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     
@@ -91,10 +112,32 @@ class Tool(models.Model):
 class Testimonial(models.Model):
     # specify options for use_type field
     use_type_choices = (
+        ("emergency-response", "Emergency Response"),
+        ("non-emergency", "Project"),
+    )
+    
+    use_type = models.CharField(max_length=50, choices=use_type_choices, default="Emergency Response")
+    related_emergency_name = models.CharField(max_length=200, default="No emergency specified.", null=True)
+    added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+class ToolPicker(models.Model):
+    intended_use_type_choices = (
         ('emergency-response', 'Emergency Response'),
         ('non-emergency', 'Project'),
     )
     
-    use_type = models.CharField(max_length=50, choices=use_type_choices)
-    related_emergency_name = models.CharField(max_length=200, default="No emergency specified.", null=True)
-    added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    intended_use_type = models.CharField(max_length=50, choices=intended_use_type_choices)
+    available_budget = models.IntegerField(default=1, validators=[
+            MinValueValidator(0, message="Available budget cannot be less than 1"),
+            MaxValueValidator(4, message="Available budget cannot be greater than 4"),
+        ])
+    
+class ToolPickerResponses(models.Model):
+    default_selection = "No data provided."
+    
+    unique_id = models.CharField(max_length=100, null=True, default="Not entered.")
+    intended_use_type = models.CharField(max_length=50, default=default_selection)
+    available_budget = models.IntegerField(default=0)
+    
+    def __repr__():
+        f"{unique_id}-{intended_use_type}-budget={available_budget}"
