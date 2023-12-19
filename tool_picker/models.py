@@ -16,6 +16,104 @@ class ToolAttributeDefinition(models.Model):
     cost3 = models.TextField(default=default_def, null=True)
     cost4 = models.TextField(default=default_def, null=True)
     
+    # setup time
+    setup_time_def = models.TextField(default=default_def, null=True)
+    setup_time1 = models.TextField(default=default_def, null=True)
+    setup_time2 = models.TextField(default=default_def, null=True)
+    setup_time3 = models.TextField(default=default_def, null=True)
+    setup_time4 = models.TextField(default=default_def, null=True)
+    
+    # setup complexity
+    setup_complexity_def = models.TextField(default=default_def, null=True)
+    setup_complexity1 = models.TextField(default=default_def, null=True)
+    setup_complexity2 = models.TextField(default=default_def, null=True)
+    setup_complexity3 = models.TextField(default=default_def, null=True)
+    setup_complexity4 = models.TextField(default=default_def, null=True)
+    
+    # maintenance
+    maintenance_def = models.TextField(default=default_def, null=True)
+    maintenance1 = models.TextField(default=default_def, null=True)
+    maintenance2 = models.TextField(default=default_def, null=True)
+    maintenance3 = models.TextField(default=default_def, null=True)
+    maintenance4 = models.TextField(default=default_def, null=True)
+    
+    # closeout
+    closeout_def = models.TextField(default=default_def, null=True)
+    closeout1 = models.TextField(default=default_def, null=True)
+    closeout2 = models.TextField(default=default_def, null=True)
+    closeout3 = models.TextField(default=default_def, null=True)
+    closeout4 = models.TextField(default=default_def, null=True)
+    
+    # training and support resources
+    support_def = models.TextField(default=default_def, null=True)
+    support1 = models.TextField(default=default_def, null=True)
+    support2 = models.TextField(default=default_def, null=True)
+    support3 = models.TextField(default=default_def, null=True)
+    support4 = models.TextField(default=default_def, null=True)
+    
+    # performance
+    performance_def = models.TextField(default=default_def, null=True)
+    performance1 = models.TextField(default=default_def, null=True)
+    performance2 = models.TextField(default=default_def, null=True)
+    performance3 = models.TextField(default=default_def, null=True)
+    performance4 = models.TextField(default=default_def, null=True)
+    
+    # connectivity
+    connectivity_def = models.TextField(default=default_def, null=True)
+    connectivity1 = models.TextField(default=default_def, null=True)
+    connectivity2 = models.TextField(default=default_def, null=True)
+    connectivity3 = models.TextField(default=default_def, null=True)
+    connectivity4 = models.TextField(default=default_def, null=True)
+    
+    # data cleaning
+    data_cleaning_def = models.TextField(default=default_def, null=True)
+    data_cleaning1 = models.TextField(default=default_def, null=True)
+    data_cleaning2 = models.TextField(default=default_def, null=True)
+    data_cleaning3 = models.TextField(default=default_def, null=True)
+    data_cleaning4 = models.TextField(default=default_def, null=True)
+    
+    # data viz
+    data_viz_def = models.TextField(default=default_def, null=True)
+    data_viz1 = models.TextField(default=default_def, null=True)
+    data_viz2 = models.TextField(default=default_def, null=True)
+    data_viz3 = models.TextField(default=default_def, null=True)
+    data_viz4 = models.TextField(default=default_def, null=True)
+    
+    # interoperability
+    interoperability_def = models.TextField(default=default_def, null=True)
+    interoperability1 = models.TextField(default=default_def, null=True)
+    interoperability2 = models.TextField(default=default_def, null=True)
+    interoperability3 = models.TextField(default=default_def, null=True)
+    interoperability4 = models.TextField(default=default_def, null=True)
+    
+    # localization
+    localization_def = models.TextField(default=default_def, null=True)
+    localization1 = models.TextField(default=default_def, null=True)
+    localization2 = models.TextField(default=default_def, null=True)
+    localization3 = models.TextField(default=default_def, null=True)
+    localization4 = models.TextField(default=default_def, null=True)
+    
+    # corresponding tech
+    corresponding_tech_def = models.TextField(default=default_def, null=True)
+    corresponding_tech1 = models.TextField(default=default_def, null=True)
+    corresponding_tech2 = models.TextField(default=default_def, null=True)
+    corresponding_tech3 = models.TextField(default=default_def, null=True)
+    corresponding_tech4 = models.TextField(default=default_def, null=True)
+    
+    # data privacy
+    data_privacy_def = models.TextField(default=default_def, null=True)
+    data_privacy1 = models.TextField(default=default_def, null=True)
+    data_privacy2 = models.TextField(default=default_def, null=True)
+    data_privacy3 = models.TextField(default=default_def, null=True)
+    data_privacy4 = models.TextField(default=default_def, null=True)
+    
+    # data protection
+    data_protection_def = models.TextField(default=default_def, null=True)
+    data_protection1 = models.TextField(default=default_def, null=True)
+    data_protection2 = models.TextField(default=default_def, null=True)
+    data_protection3 = models.TextField(default=default_def, null=True)
+    data_protection4 = models.TextField(default=default_def, null=True)
+    
     date_added = models.DateTimeField(default=timezone.now)
     date_modified = models.DateTimeField(auto_now=True)
 
@@ -128,9 +226,17 @@ class ToolPicker(models.Model):
     
     intended_use_type = models.CharField(max_length=50, choices=intended_use_type_choices)
     available_budget = models.IntegerField(default=1, validators=[
-            MinValueValidator(0, message="Available budget cannot be less than 1"),
+            MinValueValidator(1, message="Available budget cannot be less than 1"),
             MaxValueValidator(4, message="Available budget cannot be greater than 4"),
         ])
+    setup_time = models.IntegerField(default=1, validators=[
+            MinValueValidator(1, message="Setup time cannot be less than 1"),
+            MaxValueValidator(4, message="Setup time cannot be greater than 4"),
+        ])
+    setup_complexity = models.IntegerField(default=1, validators=[
+        MinValueValidator(1, message="Setup complexity cannot be less than 1"),
+        MaxValueValidator(4, message="Setup complexity cannot be greater than 4"),
+    ])
     
 class ToolPickerResponses(models.Model):
     default_selection = "No data provided."
@@ -138,6 +244,8 @@ class ToolPickerResponses(models.Model):
     unique_id = models.CharField(max_length=100, null=True, default="Not entered.")
     intended_use_type = models.CharField(max_length=50, default=default_selection)
     available_budget = models.IntegerField(default=0)
+    setup_time = models.IntegerField(default=0)
+    setup_complexity = models.IntegerField(default=0)
     
     def __repr__():
         f"{unique_id}-{intended_use_type}-budget={available_budget}"
