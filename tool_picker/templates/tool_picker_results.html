@@ -1,0 +1,128 @@
+<style>
+	/* custom CSS for card layouts */
+	.card-body {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	.card {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	/* Specific card content adjustments */
+	.bottom-stick {
+		margin-top: auto;
+	}
+</style>
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+	<div class="row g-3 align-items-center my-4">
+		<h3 class="mb-0">Recommended Data Management Solutions</h3>
+		<div class="col-7">
+			<p class="results-page-paragraph">Click on tool's card below to learn more about its features and why your answers suggest that it might be a good fit for your needs.</p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xl-9 col-xxl-8">
+			<div class="row g-4">
+				<!-- Card list START -->
+				<div class="col-12">
+					<div class="card shadow overflow-hidden p-2">
+						<div class="row g-0">
+							<div class="col-md-3 overflow-hidden">
+								<img src="../static/assets/images/bg/redrose.png" class="rounded-2" alt="Card image">
+								<!-- Ribbon -->
+								<div class="card-img-overlay">
+									<div class="ribbon"><span>Top Result</span></div>
+								</div>
+							</div>
+							<div class="col-md-9 d-flex flex-column">
+								<div class="card-body">
+									<div class="mb-auto">
+										<div class="d-flex justify-content-between align-items-center mb-2">
+											<!-- Badge -->
+											<a href="#" class="badge text-bg-primary mb-2 mb-sm-0">Best Fit</a>
+											<div>
+												<span class="h6 fw-light me-3"><i class="fas fa-star text-warning me-1"></i>4.5</span>
+											</div>
+										</div>
+					
+										<h5 class="card-title"><a href="#">RedRose</a></h5>
+										<p class="text-truncate-2 d-none d-lg-block">Tool description here</p>
+									</div>
+					
+									<div class="mt-auto">
+										<div class="d-sm-flex justify-content-sm-between align-items-center">
+											<div class="d-flex align-items-center">
+												<div>
+													<ul class="list-inline mb-0">
+														<li class="list-inline-item h6 fw-light"><i class="fas fa-signal text-success me-2"></i>High Cost</li>
+													</ul>
+												</div>
+											</div>
+											<div class="mt-3 mt-sm-0">
+												<a href="#" class="btn btn-dark">View more</a>    
+											</div>                  
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Card list END -->
+			</div>
+		</div>
+		
+		<div class="col-xxl-4">
+			<!-- Responsive offcanvas body START -->
+			<div class="offcanvas-xl offcanvas-end" tabindex="-1" id="offcanvasSidebar">
+				<div class="offcanvas-header bg-light">
+					<h5 class="offcanvas-title" id="offcanvasNavbarLabel">Advance Filter</h5>
+					<button  type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasSidebar" aria-label="Close"></button>
+				</div>
+				<div class="offcanvas-body p-3 p-xl-0">
+					<div class="card card-body shadow p-4 mb-4">
+						<h4 class="mb-4">Your Responses</h4>
+						<div class="row">
+							<div class="col">
+								<!-- Budget -->
+								<div class="mb-2"><small class="fw-bold">Budget</small></div>
+								<div class="progress progress-sm bg-primary bg-opacity-10">
+									<div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{available_budget_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+										<span class="progress-percent-simple h6 mb-0"></span>
+									</div>
+								</div>
+								
+								<!-- Setup time -->
+								<div class="mt-4 mb-2"><small class="fw-bold">Setup Time</small></div>
+								<div class="progress progress-sm bg-primary bg-opacity-10">
+									<div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{setup_time_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+										<span class="progress-percent-simple h6 mb-0"></span>
+									</div>
+								</div>
+								
+								<!-- Setup complexity -->
+								<div class="mt-4 mb-2"><small class="fw-bold">Setup Complexity</small></div>
+								<div class="progress progress-sm bg-primary bg-opacity-10">
+									<div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{setup_complexity_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+										<span class="progress-percent-simple h6 mb-0"></span>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+{% endblock %}

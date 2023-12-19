@@ -1,0 +1,303 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block scripts %}
+{% endblock %}
+{% block content %}
+
+<div class="container mt-6">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.media }}
+        <div class="row mb-5">
+            <div class="col-6 mt-2">
+                <label for="id_intended_use_type" class="form-label"><h4>Intended Use</h4></label>
+                <p class="question-helptext">Many tools are flexible enough to handle different use types, but some are better equipped to handle the unique needs of an emergency response operation rather than a normal project.</p>
+                <div class="form-check ms-2">
+                    <input class="form-check-input large-select" type="radio" name="intended_use_type" id="emergency-response" value="emergency-response">
+                    <label class="form-check-label large-select fw-bold" for="emergency-response">
+                        Emergency Response
+                    </label>
+                </div>
+                <div class="form-check ms-2">
+                    <input class="form-check-input large-select" type="radio" name="intended_use_type" id="non-emergency" value="non-emergency">
+                    <label class="form-check-label large-select fw-bold" for="non-emergency">
+                        Project
+                    </label>
+                </div>
+            </div>
+            {% if form.intended_use_type.errors %}
+                <div class="alert alert-danger mt-3">{{ form.intended_use_type.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <hr>
+        
+        <div class="row my-5">
+            <div class="col-6 mt-2">
+                <input type="hidden" id="id_available_budget_hidden" name="available_budget" value="0">
+                
+                <label for="id_available_budget" class="form-label"><h4>Available Budget</h4></label>
+                <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_budget">0</span></button>
+                <p class="question-helptext">On a scale from 1 to 4, how much budget are you able to dedicate for this tool? The specifics of your use case will ultimately determine the cost, but this question is only intended to narrow our recommendations.</p>
+                <input type="range" class="form-range" id="id_available_budget" min="0" max="4" step="1" value="0">
+                {% if form.available_budget.errors %}
+                    <div class="alert alert-danger mt-3">{{ form.available_budget.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="card p-2 border">
+                    <div class="rounded-top overflow-hidden">
+                    </div>
+                    <div class="card-body">
+                        <!-- Badge and icon -->
+                        <div class="d-flex justify-content-between">
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title">Selected Tier</h5>
+                        <div class="card">
+                            <span class="question-selected-tier" id="cost1" style="display: none;"></span>
+                            <span class="question-selected-tier" id="cost2" style="display: none;"></span>
+                            <span class="question-selected-tier" id="cost3" style="display: none;"></span>
+                            <span class="question-selected-tier" id="cost4" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="row my-5">
+            <div class="col-6 mt-2">
+                <input type="hidden" id="id_setup_time_hidden" name="setup_time" value="0">
+                
+                <label for="id_setup_time" class="form-label"><h4>Setup Time</h4></label>
+                <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_setup_time">0</span></button>
+                <p class="question-helptext">On a scale from 1 to 4, how much time do you have to configure the tool once you've chosen it?</p>
+                <input type="range" class="form-range" id="id_setup_time" min="0" max="4" step="1" value="0">
+                {% if form.setup_time.errors %}
+                    <div class="alert alert-danger mt-3">{{ form.setup_time.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="card p-2 border">
+                    <div class="rounded-top overflow-hidden">
+                    </div>
+                    <div class="card-body">
+                        <!-- Badge and icon -->
+                        <div class="d-flex justify-content-between">
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title">Selected Tier</h5>
+                        <div class="card">
+                            <span class="question-selected-tier" id="setup_time1" style="display: none;"></span>
+                            <span class="question-selected-tier" id="setup_time2" style="display: none;"></span>
+                            <span class="question-selected-tier" id="setup_time3" style="display: none;"></span>
+                            <span class="question-selected-tier" id="setup_time4" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="row my-5">
+            <div class="col-6 mt-2">
+                <input type="hidden" id="id_setup_complexity_hidden" name="setup_complexity" value="0">
+                
+                <label for="id_setup_complexity" class="form-label"><h4>Setup Complexity</h4></label>
+                <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_setup_complexity">0</span></button>
+                <p class="question-helptext">On a scale from 1 to 4, how comfortable do you feel with technical processes to get a system up and running?</p>
+                <input type="range" class="form-range" id="id_setup_complexity" min="0" max="4" step="1" value="0">
+                {% if form.setup_complexity.errors %}
+                    <div class="alert alert-danger mt-3">{{ form.setup_complexity.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="card p-2 border">
+                    <div class="rounded-top overflow-hidden">
+                    </div>
+                    <div class="card-body">
+                        <!-- Badge and icon -->
+                        <div class="d-flex justify-content-between">
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title">Selected Tier</h5>
+                        <div class="card">
+                            <span class="question-selected-tier" id="setup_complexity1" style="display: none;"></span>
+                            <span class="question-selected-tier" id="setup_complexity2" style="display: none;"></span>
+                            <span class="question-selected-tier" id="setup_complexity3" style="display: none;"></span>
+                            <span class="question-selected-tier" id="setup_complexity4" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn btn-danger" type="submit">Next</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+    $('#id_available_budget').on('input', function () {
+        var value = $(this).val();
+        $('#selected_value_budget').text(value);
+        $('#id_available_budget_hidden').val(value); 
+
+            // AJAX request for budget
+            $.ajax({
+                type: 'GET',
+                url: '/get_cost_data/',
+                data: {
+                    selected_value_budget: value.toString() 
+                },
+                success: function (data) {
+                    if (data && !data.error) {
+                        if (data.cost1 !== undefined) {
+                            $('#cost1').text(data.cost1).show();
+                        } else {
+                            $('#cost1').hide();
+                        }
+
+                        if (data.cost2 !== undefined) {
+                            $('#cost2').text(data.cost2).show();
+                        } else {
+                            $('#cost2').hide();
+                        }
+
+                        if (data.cost3 !== undefined) {
+                            $('#cost3').text(data.cost3).show();
+                        } else {
+                            $('#cost3').hide();
+                        }
+
+                        if (data.cost4 !== undefined) {
+                            $('#cost4').text(data.cost4).show();
+                        } else {
+                            $('#cost4').hide();
+                        }
+                    } else {
+                        // handle error
+                        console.error('Received null, undefined data, or error:', data && data.error);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    // handle error
+                    console.error('Error fetching data:', errmsg);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $('#id_setup_time').on('input', function () {
+        var value = $(this).val();
+        $('#selected_value_setup_time').text(value);
+        $('#id_setup_time_hidden').val(value); 
+
+            // AJAX request for budget
+            $.ajax({
+                type: 'GET',
+                url: '/get_setup_time_data/',
+                data: {
+                    selected_value_setup_time: value.toString() 
+                },
+                success: function (data) {
+                    if (data && !data.error) {
+                        if (data.setup_time1 !== undefined) {
+                            $('#setup_time1').text(data.setup_time1).show();
+                        } else {
+                            $('#setup_time1').hide();
+                        }
+
+                        if (data.setup_time2 !== undefined) {
+                            $('#setup_time2').text(data.setup_time2).show();
+                        } else {
+                            $('#setup_time2').hide();
+                        }
+
+                        if (data.setup_time3 !== undefined) {
+                            $('#setup_time3').text(data.setup_time3).show();
+                        } else {
+                            $('#setup_time3').hide();
+                        }
+
+                        if (data.setup_time4 !== undefined) {
+                            $('#setup_time4').text(data.setup_time4).show();
+                        } else {
+                            $('#setup_time4').hide();
+                        }
+                    } else {
+                        // handle error
+                        console.error('Received null, undefined data, or error:', data && data.error);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    // handle error
+                    console.error('Error fetching data:', errmsg);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $('#id_setup_complexity').on('input', function () {
+        var value = $(this).val();
+        $('#selected_value_setup_complexity').text(value);
+        $('#id_setup_complexity_hidden').val(value); 
+
+            // AJAX request for budget
+            $.ajax({
+                type: 'GET',
+                url: '/get_setup_complexity_data/',
+                data: {
+                    selected_value_setup_complexity: value.toString() 
+                },
+                success: function (data) {
+                    if (data && !data.error) {
+                        if (data.setup_complexity1 !== undefined) {
+                            $('#setup_complexity1').text(data.setup_complexity1).show();
+                        } else {
+                            $('#setup_complexity1').hide();
+                        }
+
+                        if (data.setup_complexity2 !== undefined) {
+                            $('#setup_complexity2').text(data.setup_complexity2).show();
+                        } else {
+                            $('#setup_complexity2').hide();
+                        }
+
+                        if (data.setup_complexity3 !== undefined) {
+                            $('#setup_complexity3').text(data.setup_complexity3).show();
+                        } else {
+                            $('#setup_complexity3').hide();
+                        }
+
+                        if (data.setup_complexity4 !== undefined) {
+                            $('#setup_complexity4').text(data.setup_complexity4).show();
+                        } else {
+                            $('#setup_complexity4').hide();
+                        }
+                    } else {
+                        // handle error
+                        console.error('Received null, undefined data, or error:', data && data.error);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    // handle error
+                    console.error('Error fetching data:', errmsg);
+                }
+            });
+        });
+    });
+</script>
+
+
+{% endblock %}
