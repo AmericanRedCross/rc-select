@@ -4,4 +4,4 @@ from .models import ToolPicker
 class ToolSelectionForm(forms.ModelForm):
     class Meta:
         model = ToolPicker
-        fields = ['intended_use_type', 'available_budget']
+        fields = ['intended_use_type', 'available_budget', 'setup_time', 'setup_complexity']
