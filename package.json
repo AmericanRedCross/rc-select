@@ -1,7 +1,7 @@
 {
-  "name": "eduport",
+  "name": "rc-select",
   "version": "1.4.1",
-  "description": "bootstrap based html template",
+  "description": "bootstrap based html template customized for django project",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
