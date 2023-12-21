@@ -237,6 +237,50 @@ class ToolPicker(models.Model):
         MinValueValidator(1, message="Setup complexity cannot be less than 1"),
         MaxValueValidator(4, message="Setup complexity cannot be greater than 4"),
     ])
+    maintenance = models.IntegerField(default=1, validators=[
+        MinValueValidator(1, message="Maintenance cannot be less than 1"),
+        MaxValueValidator(4, message="Maintenance cannot be greater than 4"),
+    ])
+    closeout = models.IntegerField(default=1, validators=[
+        MinValueValidator(1, message="Closeout cannot be less than 1"),
+        MaxValueValidator(4, message="Closeout cannot be greater than 4"),
+    ])
+    support = models.IntegerField(default=1, validators=[
+        MinValueValidator(1, message="Support cannot be less than 1"),
+        MaxValueValidator(4, message="Support cannot be greater than 4"),
+    ])
+    performance = models.IntegerField(default=1, validators=[
+        MinValueValidator(1, message="Performance and scalability cannot be less than 1"),
+        MaxValueValidator(4, message="Performance and scalability cannot be greater than 4"),
+    ])
+    connectivity = models.IntegerField(default=1, validators=[
+        MinValueValidator(1, message="Connectivity cannot be less than 1"),
+        MaxValueValidator(4, message="Connectivity cannot be greater than 4"),
+    ])
+    data_cleaning = models.IntegerField(default=1, validators=[
+        MinValueValidator(1, message="Data cleaning cannot be less than 1"),
+        MaxValueValidator(4, message="Data cleaning cannot be greater than 4"),
+    ])
+    data_viz = models.IntegerField(default=1, validators=[
+        MinValueValidator(1, message="Data viz cannot be less than 1"),
+        MaxValueValidator(4, message="Data viz cannot be greater than 4"),
+    ])
+    interoperability = models.IntegerField(default=1, validators=[
+        MinValueValidator(1, message="Interoperability cannot be less than 1"),
+        MaxValueValidator(4, message="Interoperability cannot be greater than 4"),
+    ])
+    localization = models.IntegerField(default=1, validators=[
+        MinValueValidator(1, message="Localization cannot be less than 1"),
+        MaxValueValidator(4, message="Localization cannot be greater than 4"),
+    ])
+    data_privacy = models.IntegerField(default=1, validators=[
+        MinValueValidator(1, message="Data privacy cannot be less than 1"),
+        MaxValueValidator(4, message="Data privacy cannot be greater than 4"),
+    ])
+    data_protection = models.IntegerField(default=1, validators=[
+        MinValueValidator(1, message="Data protection cannot be less than 1"),
+        MaxValueValidator(4, message="Data protection cannot be greater than 4"),
+    ])
     
 class ToolPickerResponses(models.Model):
     default_selection = "No data provided."
@@ -246,6 +290,17 @@ class ToolPickerResponses(models.Model):
     available_budget = models.IntegerField(default=0)
     setup_time = models.IntegerField(default=0)
     setup_complexity = models.IntegerField(default=0)
+    maintenance = models.IntegerField(default=0)
+    closeout = models.IntegerField(default=0)
+    support = models.IntegerField(default=0)
+    performance = models.IntegerField(default=0)
+    connectivity = models.IntegerField(default=0)
+    data_cleaning = models.IntegerField(default=0)
+    data_viz = models.IntegerField(default=0)
+    interoperability = models.IntegerField(default=0)
+    localization = models.IntegerField(default=0)
+    data_privacy = models.IntegerField(default=0)
+    data_protection = models.IntegerField(default=0)
     
     def __repr__():
         f"{unique_id}-{intended_use_type}-budget={available_budget}"
