@@ -530,18 +530,27 @@
     $(document).ready(function() {
         $('form').submit(function(event) {
             var isValid = true;
-
-            // Check each required field
+            
+            // check each required field
             $(this).find(':input[required]').each(function() {
-                if (!$(this).val()) {
+                if (!$(this).val() || $(this).val() === '0') { // checks if value is default or empty
                     isValid = false;
-                    return false; // Stop loop if a field is empty
+                    $(this).addClass('is-invalid'); // bootstrap class to highlight error
+                    return false; // stop the loop if a field is empty
+                } else {
+                    $(this).removeClass('is-invalid');
                 }
             });
 
+            // check radio buttons for 'Intended Use'
+            var intendedUseSelected = $('input[name="intended_use_type"]:checked').length > 0;
+            if (!intendedUseSelected) {
+                isValid = false;
+            }
+
             if (!isValid) {
-                alert('Please fill in all required fields.');
-                event.preventDefault(); // Prevent form submission
+                alert('Please fill in all required fields and make sure no question is left unanswered.');
+                event.preventDefault(); // prevent form submission
             }
         });
     });
