@@ -33,7 +33,7 @@
 			<div class="row g-4">
 				<!-- Card list START -->
 				<div class="col-12">
-					<div class="card shadow overflow-hidden p-2">
+					<div class="card shadow overflow-hidden p-2 mb-3">
 						<div class="row g-0">
 							<div class="col-md-3 overflow-hidden">
 								<img src="../static/assets/images/bg/redrose.png" class="rounded-2" alt="Card image">
@@ -65,13 +65,19 @@
 														<li class="list-inline-item h6 fw-light"><i class="fas fa-signal text-success me-2"></i>High Cost</li>
 													</ul>
 												</div>
-											</div>
+											</div>											
 											<div class="mt-3 mt-sm-0">
-												<a href="#" class="btn btn-dark">View more</a>    
+												<a class="btn btn-danger btn-sm" data-bs-toggle="collapse" href="#expandResults" role="button" aria-expanded="false" aria-controls="expandResults">
+												View Results</a>   
 											</div>                  
 										</div>
 									</div>
 								</div>
+							</div>
+						</div>
+						<div class="collapse" id="expandResults">
+							<div class="card card-body">
+								Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
 							</div>
 						</div>
 					</div>
@@ -92,26 +98,115 @@
 						<h4 class="mb-4">Your Responses</h4>
 						<div class="row">
 							<div class="col">
+								
 								<!-- Budget -->
 								<div class="mb-2"><small class="fw-bold">Budget</small></div>
 								<div class="progress progress-sm bg-primary bg-opacity-10">
-									<div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{available_budget_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+									<div class="progress-bar bg-danger aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{available_budget_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
 										<span class="progress-percent-simple h6 mb-0"></span>
 									</div>
 								</div>
 								
 								<!-- Setup time -->
 								<div class="mt-4 mb-2"><small class="fw-bold">Setup Time</small></div>
-								<div class="progress progress-sm bg-primary bg-opacity-10">
-									<div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{setup_time_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+								<div class="progress progress-sm bg-danger bg-opacity-10">
+									<div class="progress-bar bg-danger aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{setup_time_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
 										<span class="progress-percent-simple h6 mb-0"></span>
 									</div>
 								</div>
 								
 								<!-- Setup complexity -->
 								<div class="mt-4 mb-2"><small class="fw-bold">Setup Complexity</small></div>
-								<div class="progress progress-sm bg-primary bg-opacity-10">
-									<div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{setup_complexity_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+								<div class="progress progress-sm bg-danger bg-opacity-10">
+									<div class="progress-bar bg-danger aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{setup_complexity_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+										<span class="progress-percent-simple h6 mb-0"></span>
+									</div>
+								</div>
+								
+								<!-- Maintenance -->
+								<div class="mt-4 mb-2"><small class="fw-bold">System Maintenance</small></div>
+								<div class="progress progress-sm bg-danger bg-opacity-10">
+									<div class="progress-bar bg-danger aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{maintenance_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+										<span class="progress-percent-simple h6 mb-0"></span>
+									</div>
+								</div>
+								
+								<!-- Closeout -->
+								<div class="mt-4 mb-2"><small class="fw-bold">System Closeout</small></div>
+								<div class="progress progress-sm bg-danger bg-opacity-10">
+									<div class="progress-bar bg-danger aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{closeout_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+										<span class="progress-percent-simple h6 mb-0"></span>
+									</div>
+								</div>
+								
+								<!-- Support -->
+								<div class="mt-4 mb-2"><small class="fw-bold">Training and Support</small></div>
+								<div class="progress progress-sm bg-danger bg-opacity-10">
+									<div class="progress-bar bg-danger aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{support_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+										<span class="progress-percent-simple h6 mb-0"></span>
+									</div>
+								</div>
+								
+								<!-- Performance -->
+								<div class="mt-4 mb-2"><small class="fw-bold">Performance and Scalability</small></div>
+								<div class="progress progress-sm bg-danger bg-opacity-10">
+									<div class="progress-bar bg-danger aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{performance_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+										<span class="progress-percent-simple h6 mb-0"></span>
+									</div>
+								</div>
+								
+								<!-- Performance -->
+								<div class="mt-4 mb-2"><small class="fw-bold">Connectivity</small></div>
+								<div class="progress progress-sm bg-danger bg-opacity-10">
+									<div class="progress-bar bg-danger aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{connectivity_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+										<span class="progress-percent-simple h6 mb-0"></span>
+									</div>
+								</div>
+								
+								<!-- Data cleaning -->
+								<div class="mt-4 mb-2"><small class="fw-bold">Data Cleaning</small></div>
+								<div class="progress progress-sm bg-danger bg-opacity-10">
+									<div class="progress-bar bg-danger aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{data_cleaning_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+										<span class="progress-percent-simple h6 mb-0"></span>
+									</div>
+								</div>
+								
+								<!-- Data viz -->
+								<div class="mt-4 mb-2"><small class="fw-bold">Data Visualization</small></div>
+								<div class="progress progress-sm bg-danger bg-opacity-10">
+									<div class="progress-bar bg-danger aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{data_viz_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+										<span class="progress-percent-simple h6 mb-0"></span>
+									</div>
+								</div>
+								
+								<!-- Interoperability -->
+								<div class="mt-4 mb-2"><small class="fw-bold">Data Interoperability</small></div>
+								<div class="progress progress-sm bg-danger bg-opacity-10">
+									<div class="progress-bar bg-danger aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{interoperability_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+										<span class="progress-percent-simple h6 mb-0"></span>
+									</div>
+								</div>
+								
+								<!-- Localization -->
+								<div class="mt-4 mb-2"><small class="fw-bold">Localization</small></div>
+								<div class="progress progress-sm bg-danger bg-opacity-10">
+									<div class="progress-bar bg-danger aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{localization_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+										<span class="progress-percent-simple h6 mb-0"></span>
+									</div>
+								</div>
+								
+								<!-- Data Privacy -->
+								<div class="mt-4 mb-2"><small class="fw-bold">Data Privacy</small></div>
+								<div class="progress progress-sm bg-danger bg-opacity-10">
+									<div class="progress-bar bg-danger aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{data_privacy_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
+										<span class="progress-percent-simple h6 mb-0"></span>
+									</div>
+								</div>
+								
+								<!-- Data Protection -->
+								<div class="mt-4 mb-2"><small class="fw-bold">Data Protection</small></div>
+								<div class="progress progress-sm bg-danger bg-opacity-10">
+									<div class="progress-bar bg-danger aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{data_protection_bar}}%;" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">
 										<span class="progress-percent-simple h6 mb-0"></span>
 									</div>
 								</div>

@@ -34,12 +34,12 @@
         
         <div class="row my-5">
             <div class="col-6 mt-2">
-                <input type="hidden" id="id_available_budget_hidden" name="available_budget" value="0">
+                <input type="hidden" id="id_available_budget_hidden" name="available_budget" value="0" required>
                 
                 <label for="id_available_budget" class="form-label"><h4>Available Budget</h4></label>
                 <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_budget">0</span></button>
                 <p class="question-helptext">On a scale from 1 to 4, how much budget are you able to dedicate for this tool? The specifics of your use case will ultimately determine the cost, but this question is only intended to narrow our recommendations.</p>
-                <input type="range" class="form-range" id="id_available_budget" min="0" max="4" step="1" value="0">
+                <input type="range" class="form-range" id="id_available_budget" min="0" max="4" step="1" value="0" oninput="document.getElementById('id_available_budget_hidden').value = this.value">
                 {% if form.available_budget.errors %}
                     <div class="alert alert-danger mt-3">{{ form.available_budget.errors }}</div>
                 {% endif %}
@@ -69,12 +69,12 @@
         
         <div class="row my-5">
             <div class="col-6 mt-2">
-                <input type="hidden" id="id_setup_time_hidden" name="setup_time" value="0">
+                <input type="hidden" id="id_setup_time_hidden" name="setup_time" value="0" required>
                 
                 <label for="id_setup_time" class="form-label"><h4>Setup Time</h4></label>
                 <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_setup_time">0</span></button>
                 <p class="question-helptext">On a scale from 1 to 4, how much time do you have to configure the tool once you've chosen it?</p>
-                <input type="range" class="form-range" id="id_setup_time" min="0" max="4" step="1" value="0">
+                <input type="range" class="form-range" id="id_setup_time" min="0" max="4" step="1" value="0" oninput="document.getElementById('id_setup_time_hidden').value = this.value">
                 {% if form.setup_time.errors %}
                     <div class="alert alert-danger mt-3">{{ form.setup_time.errors }}</div>
                 {% endif %}
@@ -104,12 +104,12 @@
         
         <div class="row my-5">
             <div class="col-6 mt-2">
-                <input type="hidden" id="id_setup_complexity_hidden" name="setup_complexity" value="0">
+                <input type="hidden" id="id_setup_complexity_hidden" name="setup_complexity" value="0" required>
                 
                 <label for="id_setup_complexity" class="form-label"><h4>Setup Complexity</h4></label>
                 <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_setup_complexity">0</span></button>
                 <p class="question-helptext">On a scale from 1 to 4, how comfortable do you feel with technical processes to get a system up and running?</p>
-                <input type="range" class="form-range" id="id_setup_complexity" min="0" max="4" step="1" value="0">
+                <input type="range" class="form-range" id="id_setup_complexity" min="0" max="4" step="1" value="0" oninput="document.getElementById('id_setup_complexity_hidden').value = this.value">
                 {% if form.setup_complexity.errors %}
                     <div class="alert alert-danger mt-3">{{ form.setup_complexity.errors }}</div>
                 {% endif %}
@@ -135,11 +135,418 @@
             </div>
         </div>
         
+        <hr>
+        
+        <div class="row my-5">
+            <div class="col-6 mt-2">
+                <input type="hidden" id="id_maintenance_hidden" name="maintenance" value="0" required>
+                
+                <label for="id_maintenance" class="form-label"><h4>Maintenance Resources</h4></label>
+                <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_maintenance">0</span></button>
+                <p class="question-helptext">On a scale from 1 to 4, how much time, money, and human resources are you able to dedicate to maintaining the system after it has been set up?</p>
+                <input type="range" class="form-range" id="id_maintenance" min="0" max="4" step="1" value="0" oninput="document.getElementById('id_maintenance_hidden').value = this.value">
+                {% if form.maintenance.errors %}
+                    <div class="alert alert-danger mt-3">{{ form.maintenance.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="card p-2 border">
+                    <div class="rounded-top overflow-hidden">
+                    </div>
+                    <div class="card-body">
+                        <!-- Badge and icon -->
+                        <div class="d-flex justify-content-between">
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title">Selected Tier</h5>
+                        <div class="card">
+                            <span class="question-selected-tier" id="maintenance1" style="display: none;"></span>
+                            <span class="question-selected-tier" id="maintenance2" style="display: none;"></span>
+                            <span class="question-selected-tier" id="maintenance3" style="display: none;"></span>
+                            <span class="question-selected-tier" id="maintenance4" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="row my-5">
+            <div class="col-6 mt-2">
+                <input type="hidden" id="id_closeout_hidden" name="closeout" value="0" required>
+                
+                <label for="id_closeout" class="form-label"><h4>Closeout Resources</h4></label>
+                <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_closeout">0</span></button>
+                <p class="question-helptext">On a scale from 1 to 4, how flexible does the tool need to be when your team is finished with the project?</p>
+                <input type="range" class="form-range" id="id_closeout" min="0" max="4" step="1" value="0" oninput="document.getElementById('id_closeout_hidden').value = this.value">
+                {% if form.closeout.errors %}
+                    <div class="alert alert-danger mt-3">{{ form.closeout.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="card p-2 border">
+                    <div class="rounded-top overflow-hidden">
+                    </div>
+                    <div class="card-body">
+                        <!-- Badge and icon -->
+                        <div class="d-flex justify-content-between">
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title">Selected Tier</h5>
+                        <div class="card">
+                            <span class="question-selected-tier" id="closeout1" style="display: none;"></span>
+                            <span class="question-selected-tier" id="closeout2" style="display: none;"></span>
+                            <span class="question-selected-tier" id="closeout3" style="display: none;"></span>
+                            <span class="question-selected-tier" id="closeout4" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="row my-5">
+            <div class="col-6 mt-2">
+                <input type="hidden" id="id_support_hidden" name="support" value="0" required>
+                
+                <label for="id_support" class="form-label"><h4>Training and Support Resources</h4></label>
+                <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_support">0</span></button>
+                <p class="question-helptext">On a scale from 1 to 4, how flexible does the tool need to be when your team is finished with the project?</p>
+                <input type="range" class="form-range" id="id_support" min="0" max="4" step="1" value="0" oninput="document.getElementById('id_support_hidden').value = this.value">
+                {% if form.support.errors %}
+                    <div class="alert alert-danger mt-3">{{ form.support.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="card p-2 border">
+                    <div class="rounded-top overflow-hidden">
+                    </div>
+                    <div class="card-body">
+                        <!-- Badge and icon -->
+                        <div class="d-flex justify-content-between">
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title">Selected Tier</h5>
+                        <div class="card">
+                            <span class="question-selected-tier" id="support1" style="display: none;"></span>
+                            <span class="question-selected-tier" id="support2" style="display: none;"></span>
+                            <span class="question-selected-tier" id="support3" style="display: none;"></span>
+                            <span class="question-selected-tier" id="support4" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="row my-5">
+            <div class="col-6 mt-2">
+                <input type="hidden" id="id_performance_hidden" name="performance" value="0" required>
+                
+                <label for="id_performance" class="form-label"><h4>Performance and Scalability</h4></label>
+                <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_performance">0</span></button>
+                <p class="question-helptext">On a scale from 1 to 4, important is it that the tool or platform be able to scale up as the program evolves? This refers to how well it can handle increased data storage needs or additional features without affecting the end user's experience using it.</p>
+                <input type="range" class="form-range" id="id_performance" min="0" max="4" step="1" value="0" oninput="document.getElementById('id_performance_hidden').value = this.value">
+                {% if form.performance.errors %}
+                    <div class="alert alert-danger mt-3">{{ form.performance.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="card p-2 border">
+                    <div class="rounded-top overflow-hidden">
+                    </div>
+                    <div class="card-body">
+                        <!-- Badge and icon -->
+                        <div class="d-flex justify-content-between">
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title">Selected Tier</h5>
+                        <div class="card">
+                            <span class="question-selected-tier" id="performance1" style="display: none;"></span>
+                            <span class="question-selected-tier" id="performance2" style="display: none;"></span>
+                            <span class="question-selected-tier" id="performance3" style="display: none;"></span>
+                            <span class="question-selected-tier" id="performance4" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="row my-5">
+            <div class="col-6 mt-2">
+                <input type="hidden" id="id_connectivity_hidden" name="connectivity" value="0" required>
+                
+                <label for="id_connectivity" class="form-label"><h4>Connectivity</h4></label>
+                <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_connectivity">0</span></button>
+                <p class="question-helptext">On a scale from 1 to 4, how important is having the data widely-accessible across a distributed team?</p>
+                <input type="range" class="form-range" id="id_connectivity" min="0" max="4" step="1" value="0" oninput="document.getElementById('id_connectivity_hidden').value = this.value">
+                {% if form.connectivity.errors %}
+                    <div class="alert alert-danger mt-3">{{ form.connectivity.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="card p-2 border">
+                    <div class="rounded-top overflow-hidden">
+                    </div>
+                    <div class="card-body">
+                        <!-- Badge and icon -->
+                        <div class="d-flex justify-content-between">
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title">Selected Tier</h5>
+                        <div class="card">
+                            <span class="question-selected-tier" id="connectivity1" style="display: none;"></span>
+                            <span class="question-selected-tier" id="connectivity2" style="display: none;"></span>
+                            <span class="question-selected-tier" id="connectivity3" style="display: none;"></span>
+                            <span class="question-selected-tier" id="connectivity4" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="row my-5">
+            <div class="col-6 mt-2">
+                <input type="hidden" id="id_data_cleaning_hidden" name="data_cleaning" value="0" required>
+                
+                <label for="id_data_cleaning" class="form-label"><h4>Data Cleaning</h4></label>
+                <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_data_cleaning">0</span></button>
+                <p class="question-helptext">On a scale from 1 to 4, how important is it that the tool offer a way to handle data cleaning (e.g. beneficiary de-duplication)?</p>
+                <input type="range" class="form-range" id="id_data_cleaning" min="0" max="4" step="1" value="0" oninput="document.getElementById('id_data_cleaning_hidden').value = this.value">
+                {% if form.data_cleaning.errors %}
+                    <div class="alert alert-danger mt-3">{{ form.data_cleaning.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="card p-2 border">
+                    <div class="rounded-top overflow-hidden">
+                    </div>
+                    <div class="card-body">
+                        <!-- Badge and icon -->
+                        <div class="d-flex justify-content-between">
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title">Selected Tier</h5>
+                        <div class="card">
+                            <span class="question-selected-tier" id="data_cleaning1" style="display: none;"></span>
+                            <span class="question-selected-tier" id="data_cleaning2" style="display: none;"></span>
+                            <span class="question-selected-tier" id="data_cleaning3" style="display: none;"></span>
+                            <span class="question-selected-tier" id="data_cleaning4" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="row my-5">
+            <div class="col-6 mt-2">
+                <input type="hidden" id="id_data_viz_hidden" name="data_viz" value="0" required>
+                
+                <label for="id_data_viz" class="form-label"><h4>Data Visualization</h4></label>
+                <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_data_viz">0</span></button>
+                <p class="question-helptext">On a scale from 1 to 4, how important is it that the tool have a way to visualize your data natively?</p>
+                <input type="range" class="form-range" id="id_data_viz" min="0" max="4" step="1" value="0" oninput="document.getElementById('id_data_viz_hidden').value = this.value">
+                {% if form.data_viz.errors %}
+                    <div class="alert alert-danger mt-3">{{ form.data_viz.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="card p-2 border">
+                    <div class="rounded-top overflow-hidden">
+                    </div>
+                    <div class="card-body">
+                        <!-- Badge and icon -->
+                        <div class="d-flex justify-content-between">
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title">Selected Tier</h5>
+                        <div class="card">
+                            <span class="question-selected-tier" id="data_viz1" style="display: none;"></span>
+                            <span class="question-selected-tier" id="data_viz2" style="display: none;"></span>
+                            <span class="question-selected-tier" id="data_viz3" style="display: none;"></span>
+                            <span class="question-selected-tier" id="data_viz4" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="row my-5">
+            <div class="col-6 mt-2">
+                <input type="hidden" id="id_interoperability_hidden" name="interoperability" value="0" required>
+                
+                <label for="id_interoperability" class="form-label"><h4>Data Interoperability</h4></label>
+                <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_interoperability">0</span></button>
+                <p class="question-helptext">On a scale from 1 to 4, how important is it that the tool manage your data in a format that allows you to move it and work with it in another tool?</p>
+                <input type="range" class="form-range" id="id_interoperability" min="0" max="4" step="1" value="0" oninput="document.getElementById('id_interoperability_hidden').value = this.value">
+                {% if form.interoperability.errors %}
+                    <div class="alert alert-danger mt-3">{{ form.interoperability.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="card p-2 border">
+                    <div class="rounded-top overflow-hidden">
+                    </div>
+                    <div class="card-body">
+                        <!-- Badge and icon -->
+                        <div class="d-flex justify-content-between">
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title">Selected Tier</h5>
+                        <div class="card">
+                            <span class="question-selected-tier" id="interoperability1" style="display: none;"></span>
+                            <span class="question-selected-tier" id="interoperability2" style="display: none;"></span>
+                            <span class="question-selected-tier" id="interoperability3" style="display: none;"></span>
+                            <span class="question-selected-tier" id="interoperability4" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="row my-5">
+            <div class="col-6 mt-2">
+                <input type="hidden" id="id_localization_hidden" name="localization" value="0" required>
+                
+                <label for="id_localization" class="form-label"><h4>Localization</h4></label>
+                <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_localization">0</span></button>
+                <p class="question-helptext">On a scale from 1 to 4, how important is it that the tool be available in other languages or be adaptable to your local context?</p>
+                <input type="range" class="form-range" id="id_localization" min="0" max="4" step="1" value="0" oninput="document.getElementById('id_localization_hidden').value = this.value">
+                {% if form.localization.errors %}
+                    <div class="alert alert-danger mt-3">{{ form.localization.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="card p-2 border">
+                    <div class="rounded-top overflow-hidden">
+                    </div>
+                    <div class="card-body">
+                        <!-- Badge and icon -->
+                        <div class="d-flex justify-content-between">
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title">Selected Tier</h5>
+                        <div class="card">
+                            <span class="question-selected-tier" id="localization1" style="display: none;"></span>
+                            <span class="question-selected-tier" id="localization2" style="display: none;"></span>
+                            <span class="question-selected-tier" id="localization3" style="display: none;"></span>
+                            <span class="question-selected-tier" id="localization4" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="row my-5">
+            <div class="col-6 mt-2">
+                <input type="hidden" id="id_data_privacy_hidden" name="data_privacy" value="0" required>
+                
+                <label for="id_data_privacy" class="form-label"><h4>Data Privacy</h4></label>
+                <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_data_privacy">0</span></button>
+                <p class="question-helptext">On a scale from 1 to 4, how important is it that the tool be available in other languages or be adaptable to your local context?</p>
+                <input type="range" class="form-range" id="id_data_privacy" min="0" max="4" step="1" value="0" oninput="document.getElementById('id_data_privacy_hidden').value = this.value">
+                {% if form.data_privacy.errors %}
+                    <div class="alert alert-danger mt-3">{{ form.data_privacy.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="card p-2 border">
+                    <div class="rounded-top overflow-hidden">
+                    </div>
+                    <div class="card-body">
+                        <!-- Badge and icon -->
+                        <div class="d-flex justify-content-between">
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title">Selected Tier</h5>
+                        <div class="card">
+                            <span class="question-selected-tier" id="data_privacy1" style="display: none;"></span>
+                            <span class="question-selected-tier" id="data_privacy2" style="display: none;"></span>
+                            <span class="question-selected-tier" id="data_privacy3" style="display: none;"></span>
+                            <span class="question-selected-tier" id="data_privacy4" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="row my-5">
+            <div class="col-6 mt-2">
+                <input type="hidden" id="id_data_protection_hidden" name="data_protection" value="0" required>
+                
+                <label for="id_data_protection" class="form-label"><h4>Data Protection</h4></label>
+                <button class="btn btn-sm btn-outline btn-danger ms-2"><span class="fw-bold" id="selected_value_data_protection">0</span></button>
+                <p class="question-helptext">On a scale from 1 to 4, how important is it that the tool be available in other languages or be adaptable to your local context?</p>
+                <input type="range" class="form-range" id="id_data_protection" min="0" max="4" step="1" value="0" oninput="document.getElementById('id_data_protection_hidden').value = this.value">
+                {% if form.data_protection.errors %}
+                    <div class="alert alert-danger mt-3">{{ form.data_protection.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="card p-2 border">
+                    <div class="rounded-top overflow-hidden">
+                    </div>
+                    <div class="card-body">
+                        <!-- Badge and icon -->
+                        <div class="d-flex justify-content-between">
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title">Selected Tier</h5>
+                        <div class="card">
+                            <span class="question-selected-tier" id="data_protection1" style="display: none;"></span>
+                            <span class="question-selected-tier" id="data_protection2" style="display: none;"></span>
+                            <span class="question-selected-tier" id="data_protection3" style="display: none;"></span>
+                            <span class="question-selected-tier" id="data_protection4" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <button class="btn btn-danger" type="submit">Next</button>
     </form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('form').submit(function(event) {
+            var isValid = true;
+
+            // Check each required field
+            $(this).find(':input[required]').each(function() {
+                if (!$(this).val()) {
+                    isValid = false;
+                    return false; // Stop loop if a field is empty
+                }
+            });
+
+            if (!isValid) {
+                alert('Please fill in all required fields.');
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    });
+</script>
+
 <script>
     $(document).ready(function () {
     $('#id_available_budget').on('input', function () {
@@ -299,5 +706,587 @@
     });
 </script>
 
+<script>
+    $(document).ready(function () {
+    $('#id_maintenance').on('input', function () {
+        var value = $(this).val();
+        $('#selected_value_maintenance').text(value);
+        $('#id_maintenance_hidden').val(value); 
+
+            // AJAX request for budget
+            $.ajax({
+                type: 'GET',
+                url: '/get_maintenance_data/',
+                data: {
+                    selected_value_maintenance: value.toString() 
+                },
+                success: function (data) {
+                    if (data && !data.error) {
+                        if (data.maintenance1 !== undefined) {
+                            $('#maintenance1').text(data.maintenance1).show();
+                        } else {
+                            $('#maintenance1').hide();
+                        }
+
+                        if (data.maintenance2 !== undefined) {
+                            $('#maintenance2').text(data.maintenance2).show();
+                        } else {
+                            $('#maintenance2').hide();
+                        }
+
+                        if (data.maintenance3 !== undefined) {
+                            $('#maintenance3').text(data.maintenance3).show();
+                        } else {
+                            $('#maintenance3').hide();
+                        }
+
+                        if (data.maintenance4 !== undefined) {
+                            $('#maintenance4').text(data.maintenance4).show();
+                        } else {
+                            $('#maintenance4').hide();
+                        }
+                    } else {
+                        // handle error
+                        console.error('Received null, undefined data, or error:', data && data.error);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    // handle error
+                    console.error('Error fetching data:', errmsg);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $('#id_closeout').on('input', function () {
+        var value = $(this).val();
+        $('#selected_value_closeout').text(value);
+        $('#id_closeout_hidden').val(value); 
+
+            // AJAX request for budget
+            $.ajax({
+                type: 'GET',
+                url: '/get_closeout_data/',
+                data: {
+                    selected_value_closeout: value.toString() 
+                },
+                success: function (data) {
+                    if (data && !data.error) {
+                        if (data.closeout1 !== undefined) {
+                            $('#closeout1').text(data.closeout1).show();
+                        } else {
+                            $('#closeout1').hide();
+                        }
+
+                        if (data.closeout2 !== undefined) {
+                            $('#closeout2').text(data.closeout2).show();
+                        } else {
+                            $('#closeout2').hide();
+                        }
+
+                        if (data.closeout3 !== undefined) {
+                            $('#closeout3').text(data.closeout3).show();
+                        } else {
+                            $('#closeout3').hide();
+                        }
+
+                        if (data.closeout4 !== undefined) {
+                            $('#closeout4').text(data.closeout4).show();
+                        } else {
+                            $('#closeout4').hide();
+                        }
+                    } else {
+                        // handle error
+                        console.error('Received null, undefined data, or error:', data && data.error);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    // handle error
+                    console.error('Error fetching data:', errmsg);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $('#id_support').on('input', function () {
+        var value = $(this).val();
+        $('#selected_value_support').text(value);
+        $('#id_support_hidden').val(value); 
+
+            // AJAX request for budget
+            $.ajax({
+                type: 'GET',
+                url: '/get_support_data/',
+                data: {
+                    selected_value_support: value.toString() 
+                },
+                success: function (data) {
+                    if (data && !data.error) {
+                        if (data.support1 !== undefined) {
+                            $('#support1').text(data.support1).show();
+                        } else {
+                            $('#support1').hide();
+                        }
+
+                        if (data.support2 !== undefined) {
+                            $('#support2').text(data.support2).show();
+                        } else {
+                            $('#support2').hide();
+                        }
+
+                        if (data.support3 !== undefined) {
+                            $('#support3').text(data.support3).show();
+                        } else {
+                            $('#support3').hide();
+                        }
+
+                        if (data.support4 !== undefined) {
+                            $('#support4').text(data.support4).show();
+                        } else {
+                            $('#support4').hide();
+                        }
+                    } else {
+                        // handle error
+                        console.error('Received null, undefined data, or error:', data && data.error);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    // handle error
+                    console.error('Error fetching data:', errmsg);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $('#id_performance').on('input', function () {
+        var value = $(this).val();
+        $('#selected_value_performance').text(value);
+        $('#id_performance_hidden').val(value); 
+
+            // AJAX request for budget
+            $.ajax({
+                type: 'GET',
+                url: '/get_performance_data/',
+                data: {
+                    selected_value_performance: value.toString() 
+                },
+                success: function (data) {
+                    if (data && !data.error) {
+                        if (data.performance1 !== undefined) {
+                            $('#performance1').text(data.performance1).show();
+                        } else {
+                            $('#performance1').hide();
+                        }
+
+                        if (data.performance2 !== undefined) {
+                            $('#performance2').text(data.performance2).show();
+                        } else {
+                            $('#performance2').hide();
+                        }
+
+                        if (data.performance3 !== undefined) {
+                            $('#performance3').text(data.performance3).show();
+                        } else {
+                            $('#performance3').hide();
+                        }
+
+                        if (data.performance4 !== undefined) {
+                            $('#performance4').text(data.performance4).show();
+                        } else {
+                            $('#performance4').hide();
+                        }
+                    } else {
+                        // handle error
+                        console.error('Received null, undefined data, or error:', data && data.error);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    // handle error
+                    console.error('Error fetching data:', errmsg);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $('#id_connectivity').on('input', function () {
+        var value = $(this).val();
+        $('#selected_value_connectivity').text(value);
+        $('#id_connectivity_hidden').val(value); 
+
+            // AJAX request for budget
+            $.ajax({
+                type: 'GET',
+                url: '/get_connectivity_data/',
+                data: {
+                    selected_value_connectivity: value.toString() 
+                },
+                success: function (data) {
+                    if (data && !data.error) {
+                        if (data.connectivity1 !== undefined) {
+                            $('#connectivity1').text(data.connectivity1).show();
+                        } else {
+                            $('#connectivity1').hide();
+                        }
+
+                        if (data.connectivity2 !== undefined) {
+                            $('#connectivity2').text(data.connectivity2).show();
+                        } else {
+                            $('#connectivity2').hide();
+                        }
+
+                        if (data.connectivity3 !== undefined) {
+                            $('#connectivity3').text(data.connectivity3).show();
+                        } else {
+                            $('#connectivity3').hide();
+                        }
+
+                        if (data.connectivity4 !== undefined) {
+                            $('#connectivity4').text(data.connectivity4).show();
+                        } else {
+                            $('#connectivity4').hide();
+                        }
+                    } else {
+                        // handle error
+                        console.error('Received null, undefined data, or error:', data && data.error);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    // handle error
+                    console.error('Error fetching data:', errmsg);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $('#id_data_cleaning').on('input', function () {
+        var value = $(this).val();
+        $('#selected_value_data_cleaning').text(value);
+        $('#id_data_cleaning_hidden').val(value); 
+
+            // AJAX request for budget
+            $.ajax({
+                type: 'GET',
+                url: '/get_data_cleaning_data/',
+                data: {
+                    selected_value_data_cleaning: value.toString() 
+                },
+                success: function (data) {
+                    if (data && !data.error) {
+                        if (data.data_cleaning1 !== undefined) {
+                            $('#data_cleaning1').text(data.data_cleaning1).show();
+                        } else {
+                            $('#data_cleaning1').hide();
+                        }
+
+                        if (data.data_cleaning2 !== undefined) {
+                            $('#data_cleaning2').text(data.data_cleaning2).show();
+                        } else {
+                            $('#data_cleaning2').hide();
+                        }
+
+                        if (data.data_cleaning3 !== undefined) {
+                            $('#data_cleaning3').text(data.data_cleaning3).show();
+                        } else {
+                            $('#data_cleaning3').hide();
+                        }
+
+                        if (data.data_cleaning4 !== undefined) {
+                            $('#data_cleaning4').text(data.data_cleaning4).show();
+                        } else {
+                            $('#data_cleaning4').hide();
+                        }
+                    } else {
+                        // handle error
+                        console.error('Received null, undefined data, or error:', data && data.error);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    // handle error
+                    console.error('Error fetching data:', errmsg);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $('#id_data_viz').on('input', function () {
+        var value = $(this).val();
+        $('#selected_value_data_viz').text(value);
+        $('#id_data_viz_hidden').val(value); 
+
+            // AJAX request for budget
+            $.ajax({
+                type: 'GET',
+                url: '/get_data_viz_data/',
+                data: {
+                    selected_value_data_viz: value.toString() 
+                },
+                success: function (data) {
+                    if (data && !data.error) {
+                        if (data.data_viz1 !== undefined) {
+                            $('#data_viz1').text(data.data_viz1).show();
+                        } else {
+                            $('#data_viz1').hide();
+                        }
+
+                        if (data.data_viz2 !== undefined) {
+                            $('#data_viz2').text(data.data_viz2).show();
+                        } else {
+                            $('#data_viz2').hide();
+                        }
+
+                        if (data.data_viz3 !== undefined) {
+                            $('#data_viz3').text(data.data_viz3).show();
+                        } else {
+                            $('#data_viz3').hide();
+                        }
+
+                        if (data.data_viz4 !== undefined) {
+                            $('#data_viz4').text(data.data_viz4).show();
+                        } else {
+                            $('#data_viz4').hide();
+                        }
+                    } else {
+                        // handle error
+                        console.error('Received null, undefined data, or error:', data && data.error);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    // handle error
+                    console.error('Error fetching data:', errmsg);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $('#id_interoperability').on('input', function () {
+        var value = $(this).val();
+        $('#selected_value_interoperability').text(value);
+        $('#id_interoperability_hidden').val(value); 
+
+            // AJAX request for budget
+            $.ajax({
+                type: 'GET',
+                url: '/get_interoperability_data/',
+                data: {
+                    selected_value_interoperability: value.toString() 
+                },
+                success: function (data) {
+                    if (data && !data.error) {
+                        if (data.interoperability1 !== undefined) {
+                            $('#interoperability1').text(data.interoperability1).show();
+                        } else {
+                            $('#interoperability1').hide();
+                        }
+
+                        if (data.interoperability2 !== undefined) {
+                            $('#interoperability2').text(data.interoperability2).show();
+                        } else {
+                            $('#interoperability2').hide();
+                        }
+
+                        if (data.interoperability3 !== undefined) {
+                            $('#interoperability3').text(data.interoperability3).show();
+                        } else {
+                            $('#interoperability3').hide();
+                        }
+
+                        if (data.interoperability4 !== undefined) {
+                            $('#interoperability4').text(data.interoperability4).show();
+                        } else {
+                            $('#interoperability4').hide();
+                        }
+                    } else {
+                        // handle error
+                        console.error('Received null, undefined data, or error:', data && data.error);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    // handle error
+                    console.error('Error fetching data:', errmsg);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $('#id_localization').on('input', function () {
+        var value = $(this).val();
+        $('#selected_value_localization').text(value);
+        $('#id_localization_hidden').val(value); 
+
+            // AJAX request for budget
+            $.ajax({
+                type: 'GET',
+                url: '/get_localization_data/',
+                data: {
+                    selected_value_localization: value.toString() 
+                },
+                success: function (data) {
+                    if (data && !data.error) {
+                        if (data.localization1 !== undefined) {
+                            $('#localization1').text(data.localization1).show();
+                        } else {
+                            $('#localization1').hide();
+                        }
+
+                        if (data.localization2 !== undefined) {
+                            $('#localization2').text(data.localization2).show();
+                        } else {
+                            $('#localization2').hide();
+                        }
+
+                        if (data.localization3 !== undefined) {
+                            $('#localization3').text(data.localization3).show();
+                        } else {
+                            $('#localization3').hide();
+                        }
+
+                        if (data.localization4 !== undefined) {
+                            $('#localization4').text(data.localization4).show();
+                        } else {
+                            $('#localization4').hide();
+                        }
+                    } else {
+                        // handle error
+                        console.error('Received null, undefined data, or error:', data && data.error);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    // handle error
+                    console.error('Error fetching data:', errmsg);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $('#id_data_privacy').on('input', function () {
+        var value = $(this).val();
+        $('#selected_value_data_privacy').text(value);
+        $('#id_data_privacy_hidden').val(value); 
+
+            // AJAX request for budget
+            $.ajax({
+                type: 'GET',
+                url: '/get_data_privacy_data/',
+                data: {
+                    selected_value_data_privacy: value.toString() 
+                },
+                success: function (data) {
+                    if (data && !data.error) {
+                        if (data.data_privacy1 !== undefined) {
+                            $('#data_privacy1').text(data.data_privacy1).show();
+                        } else {
+                            $('#data_privacy1').hide();
+                        }
+
+                        if (data.data_privacy2 !== undefined) {
+                            $('#data_privacy2').text(data.data_privacy2).show();
+                        } else {
+                            $('#data_privacy2').hide();
+                        }
+
+                        if (data.data_privacy3 !== undefined) {
+                            $('#data_privacy3').text(data.data_privacy3).show();
+                        } else {
+                            $('#data_privacy3').hide();
+                        }
+
+                        if (data.data_privacy4 !== undefined) {
+                            $('#data_privacy4').text(data.data_privacy4).show();
+                        } else {
+                            $('#data_privacy4').hide();
+                        }
+                    } else {
+                        // handle error
+                        console.error('Received null, undefined data, or error:', data && data.error);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    // handle error
+                    console.error('Error fetching data:', errmsg);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $('#id_data_protection').on('input', function () {
+        var value = $(this).val();
+        $('#selected_value_data_protection').text(value);
+        $('#id_data_protection_hidden').val(value); 
+
+            // AJAX request for budget
+            $.ajax({
+                type: 'GET',
+                url: '/get_data_protection_data/',
+                data: {
+                    selected_value_data_protection: value.toString() 
+                },
+                success: function (data) {
+                    if (data && !data.error) {
+                        if (data.data_protection1 !== undefined) {
+                            $('#data_protection1').text(data.data_protection1).show();
+                        } else {
+                            $('#data_protection1').hide();
+                        }
+
+                        if (data.data_protection2 !== undefined) {
+                            $('#data_protection2').text(data.data_protection2).show();
+                        } else {
+                            $('#data_protection2').hide();
+                        }
+
+                        if (data.data_protection3 !== undefined) {
+                            $('#data_protection3').text(data.data_protection3).show();
+                        } else {
+                            $('#data_protection3').hide();
+                        }
+
+                        if (data.data_protection4 !== undefined) {
+                            $('#data_protection4').text(data.data_protection4).show();
+                        } else {
+                            $('#data_protection4').hide();
+                        }
+                    } else {
+                        // handle error
+                        console.error('Received null, undefined data, or error:', data && data.error);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    // handle error
+                    console.error('Error fetching data:', errmsg);
+                }
+            });
+        });
+    });
+</script>
 
 {% endblock %}
