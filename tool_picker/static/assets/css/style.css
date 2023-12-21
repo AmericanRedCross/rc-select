@@ -22617,14 +22617,18 @@ html[dir=rtl] .choices__input {
 /*User CSS*/
 /*# sourceMappingURL=style.css.map */
 
+.results-page-paragraph {
+  font-size: 1.3em;
+}
+
 .question-helptext {
-  font-size: 1.3em
+  font-size: 1.3em;
 }
 
 .question-selected-tier {
-  font-size: 1.3em
+  font-size: 1.3em;
 }
 
 .large-select {
-  font-size: 1.3em
+  font-size: 1.3em;
 }

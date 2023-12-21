@@ -8,6 +8,7 @@ urlpatterns = [
     path('about/', tool_picker_views.about, name='tool-picker-about'),
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
+    path('edit_form_submission/', tool_picker_views.edit_form_submission, name='edit_form_submission'),
     path('get_closeout_data/', tool_picker_views.get_closeout_data, name='get_closeout_data'),
     path('get_connectivity_data/', tool_picker_views.get_connectivity_data, name='get_connectivity_data'),
     path('get_cost_data/', tool_picker_views.get_cost_data, name='get_cost_data'),

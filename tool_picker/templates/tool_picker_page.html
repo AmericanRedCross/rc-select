@@ -531,26 +531,27 @@
         $('form').submit(function(event) {
             var isValid = true;
             
-            // check each required field
+            // Check each required field
             $(this).find(':input[required]').each(function() {
-                if (!$(this).val() || $(this).val() === '0') { // checks if value is default or empty
+                if (!$(this).val() || $(this).val() === '0') { // Checks if value is default or empty
                     isValid = false;
-                    $(this).addClass('is-invalid'); // bootstrap class to highlight error
-                    return false; // stop the loop if a field is empty
+                    $(this).addClass('is-invalid'); // Bootstrap class to highlight error
+                    return false; // Stop the loop if a field is empty
                 } else {
                     $(this).removeClass('is-invalid');
                 }
             });
 
-            // check radio buttons for 'Intended Use'
+            // Check radio buttons for 'Intended Use'
             var intendedUseSelected = $('input[name="intended_use_type"]:checked').length > 0;
             if (!intendedUseSelected) {
                 isValid = false;
+                // Add some visual cue or alert for the user here
             }
 
             if (!isValid) {
                 alert('Please fill in all required fields and make sure no question is left unanswered.');
-                event.preventDefault(); // prevent form submission
+                event.preventDefault(); // Prevent form submission
             }
         });
     });

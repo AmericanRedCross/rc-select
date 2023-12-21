@@ -1,14 +1,7 @@
-/**
-* Eduport- LMS, Education and Course Theme
-*
-* @author Webestica (https://www.webestica.com/)
-* @version 1.4.1
-**/
-
-
 /* ===================
 Table Of Content
 ======================
+00 CUSTOM
 01 PRELOADER
 02 MEGA MENU
 03 STICKY HEADER
@@ -36,6 +29,8 @@ Table Of Content
 24 OVERLAY SCROLLBARS
 26 FLATPICKER
 ====================== */
+
+
 
 "use strict";
 !function () {
