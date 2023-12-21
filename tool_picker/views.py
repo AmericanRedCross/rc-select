@@ -1,6 +1,6 @@
 import secrets
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 
 from .forms import ToolSelectionForm
@@ -19,10 +19,10 @@ def tool_selection_walkthrough(request):
     if request.method == 'POST':
         form = ToolSelectionForm(request.POST)
         if form.is_valid():
-            # Extract cleaned data
+            # extract cleaned data
             cleaned_data = form.cleaned_data
     
-            # Create a new instance of ToolPickerResponses
+            # create a new instance of ToolPickerResponses
             new_response = ToolPickerResponses(
                 unique_id=secrets.token_hex(8),
                 intended_use_type=cleaned_data['intended_use_type'],
@@ -42,21 +42,34 @@ def tool_selection_walkthrough(request):
                 data_protection=cleaned_data['data_protection']
             )
     
-            # Store response unique_id to user's session
+            # store response unique_id to user's session
             request.session['submitted_form_id'] = new_response.unique_id
     
-            # Save new instance to the database
+            # save new instance to the database
             new_response.save()
             request.session['tool_picker_page'] = cleaned_data
             return redirect('tool_picker_results')
-        # If the form is not valid, re-render the form with user input
+        # if the form is not valid, re-render the form with user input
         else:
             return render(request, 'tool_picker_page.html', {'form': form})
     else:
-        # For GET request or when form is not submitted
+        # for GET request or when form is not submitted
         form = ToolSelectionForm(initial=request.session.get('tool_picker_page', None))
     
     return render(request, 'tool_picker_page.html', {'form': form})
+
+def edit_form_submission(request, unique_id):
+    submission = get_object_or_404(ToolPickerResponses, unique_id=unique_id)  
+    
+    if request.method == 'POST':
+        form = ToolSelectionForm(request.POST, instance=submission)
+        if form.is_valid():
+            form.save()
+            return redirect('success_url')  # Redirect to a success page.
+    else:
+        form = ToolSelectionForm(instance=submission)
+    
+    return render(request, 'edit_form_template.html', {'form': form})
 
 def tool_picker_results(request):
     # load form id from user's session
