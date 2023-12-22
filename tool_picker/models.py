@@ -302,5 +302,3 @@ class ToolPickerResponses(models.Model):
     data_privacy = models.IntegerField(default=0)
     data_protection = models.IntegerField(default=0)
     
-    def __repr__():
-        f"{unique_id}-{intended_use_type}-budget={available_budget}"

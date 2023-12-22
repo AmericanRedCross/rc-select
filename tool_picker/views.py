@@ -53,7 +53,7 @@ def tool_selection_walkthrough(request):
         else:
             return render(request, 'tool_picker_page.html', {'form': form})
     else:
-        # for GET request or when form is not submitted
+        # GET request or when form is not submitted
         form = ToolSelectionForm(initial=request.session.get('tool_picker_page', None))
     
     return render(request, 'tool_picker_page.html', {'form': form})
@@ -74,6 +74,10 @@ def edit_form_submission(request, unique_id):
 def tool_picker_results(request):
     # load form id from user's session
     submitted_form_id = request.session.get('submitted_form_id')
+    
+    # send user to error page if no form found in their session
+    if not submitted_form_id: 
+        return render(request, 'error_no_submitted_form.html')
     
     try:
         response = ToolPickerResponses.objects.get(unique_id=submitted_form_id)
@@ -112,26 +116,44 @@ def tool_picker_results(request):
             'data_protection_bar': int(response.data_protection) * 25,
         }
         
-        
-        
         return render(request, 'tool_picker_results.html', context=context)
     except ToolPickerResponses.DoesNotExist:
         return render(request, 'error_template.html', {'message': 'Response not found for this form ID'})
 
-def load_toolbox(request):
-    context = {
-        'tools_data': Tool.objects.all()
-    }
+def find_best_match(request, response_id):
+    try:
+        # retrieve the single user response
+        user_response = ToolPickerResponses.objects.get(unique_id=response_id)
+    except ToolPickerResponses.DoesNotExist:
+        return render(request, 'error.html', {'message': 'Response not found'})
     
-    for tool in context['tools_data']:
-        print(tool)
+    load_toolbox = Tool.objects.all()
     
-    return render(request, 'tool_picker_results.html', context=context)
+    best_match = None
+    lowest_difference_score = float('inf')  # start with a "worst" case scenario.
+    
+    # score each tool based on how well it matches the user's needs
+    for tool in load_toolbox:
+        budget_diff = abs(tool.cost - user_response.available_budget)
+        complexity_diff = abs(tool.setup_complexity - user_response.setup_complexity)
+    
+        # sum the differences to get a total "difference score"
+        total_difference = budget_diff + complexity_diff
+    
+        # if this tool is a better match than the previous best, remember it
+        if total_difference < lowest_difference_score:
+            best_match = tool
+            lowest_difference_score = total_difference
+    
+    # check if a match was found
+    if best_match is None:
+        return render(request, 'error.html', {'message': 'No suitable tool found'})
+    
+    print(best_match)
+    
+    # Pass the best match to the template.
+    return render(request, 'tool_picker_results.html', {'best_match': best_match})
 
-def find_best_match(request):
-    
-    # to be developed
-    pass
 
 def get_cost_data(request):
     if request.method == 'GET' and 'selected_value_budget' in request.GET:
@@ -160,7 +182,7 @@ def get_cost_data(request):
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
 
-    # return JsonResponse({'error': 'Invalid request'}, status=400)
+    return JsonResponse({'error': 'Invalid request'}, status=400)
     
 def get_setup_time_data(request):
     if request.method == 'GET' and 'selected_value_setup_time' in request.GET:
