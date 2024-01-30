@@ -78,9 +78,7 @@
 										<div class="d-sm-flex justify-content-sm-between align-items-center">
 											<div class="d-flex align-items-center">
 												<div>
-													<ul class="list-inline mb-0">
-														<li class="list-inline-item h6 fw-light"><i class="fas fa-signal text-success me-2"></i>High Cost</li>
-													</ul>
+													
 												</div>
 											</div>
 											<div class="mt-3 mt-sm-0">
@@ -100,51 +98,628 @@
 											<th scope="col">Feature</th>
 											<th scope="col" class="text-center">{{ top_recommendation_name }}</th>
 											<th scope="col" class="text-center">Your Reported<br>Preference</th>
+											<th scope="col" class="text-center">Impact</th>
 										</tr>
 									</thead>
 									<tbody class="table-group-divider">
+										<tr>
+											<td scope="row" class="align-middle h-100">
+												<span class="fw-bold" style="font-size: 1.3em">Cost</span>
+											</td>
+											<td>
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light">
+														{{ top_recommendation_cost }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light" style="aspect-ratio: 1;">
+														{{ available_budget }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													{% if top_recommendation_cost <= available_budget %}
+														<span class="border border-1 rounded p-3 bg-success fw-bold text-light">
+															<span style='font-size:1.3em;'>&#9733;</span>
+														</span>
+													{% else %}
+													<span class="border border-1 rounded p-3 bg-warning fw-bold text-light">
+														<span style='font-size: 1.3em; color: white; line-height: 1;'>&#9873;</span>
+													</span>
+													{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4">
+												<span class="text-wrap">{{ top_recommendation_cost_desc }}</span>
+												{% if top_recommendation_cost <= available_budget %}
+												<br><br>
+												<span class="text-success fw-bold text-wrap">This tool satisfies your requirements for budget.</span>
+												{% else %}
+												<br><br>
+												<span class="text-warning fw-bold text-wrap">This tool may be more expensive than your budget preferences indicate.</span>
+												{% endif %}
+											</td>
+										</tr>
+
+
 										<tr>
 											<td scope="row" class="align-middle">
 												<span class="fw-bold" style="font-size: 1.3em">Setup Speed</span>
 											</td>
 											<td>
 												<div class="d-flex align-items-center justify-content-center">
-													<span class="border border-1 rounded p-3 bg-danger fw-bold">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light">
 														{{ top_recommendation_setup_speed }}
 													</span>
 												</div>
 											</td>
 											<td>
 												<div class="d-flex align-items-center justify-content-center">
-													<span class="border border-1 rounded p-3 bg-danger fw-bold">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light">
 														{{ setup_time }}
 													</span>
 												</div>
 											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													{% if top_recommendation_setup_speed <= setup_time %}
+														<span class="border border-1 rounded p-3 bg-success fw-bold text-light">
+															<span style='font-size:1.3em; line-height: 1;'>&#9733;</span>
+														</span>
+													{% else %}
+														<span class="border border-1 rounded p-3 bg-warning fw-bold text-light">
+															<span style='font-size: 1.3em; color: white; line-height: 1;'>&#9873;</span>
+														</span>
+													{% endif %}
+											</td>
 										</tr>
-										
-										<!-- <td class="text-center">
-											<div class="d-flex justify-content-center align-items-center border rounded p-1" style="width: 50px; height: 50px;">
-												<div class="d-flex justify-content-center ">
-													{{ top_recommendation_setup_speed }}
-												</div>
-											</div>
-										</td>
-										<td class="text-center">
-											<div class="d-flex justify-content-center align-items-center border rounded p-1" style="width: 50px; height: 50px;">
-												<div class="d-flex justify-content-center ">
-													{{ top_recommendation_setup_speed }}
-												</div>
-											</div>
-										</td> -->
 
 										<tr>
 											<td colspan="3">
 												<span class="text-wrap">{{ top_recommendation_setup_speed_desc }}</span>
+												{% if top_recommendation_setup_speed <= setup_time %}
+												<br><br>
+												<span class="text-success fw-bold text-wrap">This tool satisfies your requirements for setup speed.</span>
+												{% else %}
+												<br><br>
+												<span class="text-warning fw-bold text-wrap">This tool may present some challenges in meeting your requirements for setup speed.</span>
+												{% endif %}
 											</td>
 										</tr>
-
-
+										
+										<tr>
+											<td scope="row" class="align-middle h-100">
+												<span class="fw-bold" style="font-size: 1.3em">Setup Complexity</span>
+											</td>
+											<td>
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light">
+														{{ top_recommendation_setup_complexity }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light" style="aspect-ratio: 1;">
+														{{ setup_complexity }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													{% if top_recommendation_setup_complexity <= setup_complexity %}
+														<span class="border border-1 rounded p-3 bg-success fw-bold text-light">
+															<span style='font-size:1.3em;'>&#9733;</span>
+														</span>
+													{% else %}
+													<span class="border border-1 rounded p-3 bg-warning fw-bold text-light">
+														<span style='font-size: 1.3em; color: white; line-height: 1;'>&#9873;</span>
+													</span>
+													{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4">
+												<span class="text-wrap">{{ top_recommendation_setup_complexity_desc }}</span>
+												{% if top_recommendation_setup_complexity <= setup_complexity %}
+												<br><br>
+												<span class="text-success fw-bold text-wrap">This tool satisfies your requirements for setup complexity.</span>
+												{% else %}
+												<br><br>
+												<span class="text-warning fw-bold text-wrap">This tool may be more complex to set up than your preferences indicate.</span>
+												{% endif %}
+											</td>
+										</tr>
+										
+										<tr>
+											<td scope="row" class="align-middle h-100">
+												<span class="fw-bold" style="font-size: 1.3em">Maintenance</span>
+											</td>
+											<td>
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light">
+														{{ top_recommendation_maintenance_complexity }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light" style="aspect-ratio: 1;">
+														{{ maintenance }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													{% if top_recommendation_maintenance_complexity <= maintenance %}
+														<span class="border border-1 rounded p-3 bg-success fw-bold text-light">
+															<span style='font-size:1.3em;'>&#9733;</span>
+														</span>
+													{% else %}
+													<span class="border border-1 rounded p-3 bg-warning fw-bold text-light">
+														<span style='font-size: 1.3em; color: white; line-height: 1;'>&#9873;</span>
+													</span>
+													{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4">
+												<span class="text-wrap">{{ top_recommendation_maintenance_complexity_desc }}</span>
+												{% if top_recommendation_maintenance_complexity <= maintenance %}
+												<br><br>
+												<span class="text-success fw-bold text-wrap">This tool satisfies your requirements for maintaining the tool once it has launched.</span>
+												{% else %}
+												<br><br>
+												<span class="text-warning fw-bold text-wrap">This tool may be more complex to maintain than your preferences indicate.</span>
+												{% endif %}
+											</td>
+										</tr>
+										
+										<tr>
+											<td scope="row" class="align-middle h-100">
+												<span class="fw-bold" style="font-size: 1.3em">Training and Support</span>
+											</td>
+											<td>
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light">
+														{{ top_recommendation_training_and_support }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light" style="aspect-ratio: 1;">
+														{{ support }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													{% if top_recommendation_training_and_support <= support %}
+														<span class="border border-1 rounded p-3 bg-success fw-bold text-light">
+															<span style='font-size:1.3em;'>&#9733;</span>
+														</span>
+													{% else %}
+													<span class="border border-1 rounded p-3 bg-warning fw-bold text-light">
+														<span style='font-size: 1.3em; color: white; line-height: 1;'>&#9873;</span>
+													</span>
+													{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4">
+												<span class="text-wrap">{{ top_recommendation_training_and_support_desc }}</span>
+												{% if top_recommendation_training_and_support <= support %}
+												<br><br>
+												<span class="text-success fw-bold text-wrap">This tool satisfies your requirements for documentation and user support resources.</span>
+												{% else %}
+												<br><br>
+												<span class="text-warning fw-bold text-wrap">This tool may not offer adequate training and support resources based on your preferences.</span>
+												{% endif %}
+											</td>
+										</tr>
+										
+										<tr>
+											<td scope="row" class="align-middle h-100">
+												<span class="fw-bold" style="font-size: 1.3em">Transition</span>
+											</td>
+											<td>
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light">
+														{{ top_recommendation_transition }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light" style="aspect-ratio: 1;">
+														{{ closeout }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													{% if top_recommendation_transition <= closeout %}
+														<span class="border border-1 rounded p-3 bg-success fw-bold text-light">
+															<span style='font-size:1.3em;'>&#9733;</span>
+														</span>
+													{% else %}
+													<span class="border border-1 rounded p-3 bg-warning fw-bold text-light">
+														<span style='font-size: 1.3em; color: white; line-height: 1;'>&#9873;</span>
+													</span>
+													{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4">
+												<span class="text-wrap">{{ top_recommendation_transition_desc }}</span>
+												{% if top_recommendation_transition <= closeout %}
+												<br><br>
+												<span class="text-success fw-bold text-wrap">This tool satisfies your requirements for easily closing out the program.</span>
+												{% else %}
+												<br><br>
+												<span class="text-warning fw-bold text-wrap">This tool may be more complex to closeout than your preferences indicate.</span>
+												{% endif %}
+											</td>
+										</tr>
+										
+										<tr>
+											<td scope="row" class="align-middle h-100">
+												<span class="fw-bold" style="font-size: 1.3em">Performance</span>
+											</td>
+											<td>
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light">
+														{{ top_recommendation_performance }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light" style="aspect-ratio: 1;">
+														{{ performance }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													{% if top_recommendation_performance <= performance %}
+														<span class="border border-1 rounded p-3 bg-success fw-bold text-light">
+															<span style='font-size:1.3em;'>&#9733;</span>
+														</span>
+													{% else %}
+													<span class="border border-1 rounded p-3 bg-warning fw-bold text-light">
+														<span style='font-size: 1.3em; color: white; line-height: 1;'>&#9873;</span>
+													</span>
+													{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4">
+												<span class="text-wrap">{{ top_recommendation_performance_desc }}</span>
+												{% if top_recommendation_performance <= performance %}
+												<br><br>
+												<span class="text-success fw-bold text-wrap">This tool satisfies your requirements for having a tool that can perform well as programmatic needs scale up.</span>
+												{% else %}
+												<br><br>
+												<span class="text-warning fw-bold text-wrap">This tool may be more require additional resourcing and configuration if the program's scale expands.</span>
+												{% endif %}
+											</td>
+										</tr>
+										
+										<tr>
+											<td scope="row" class="align-middle h-100">
+												<span class="fw-bold" style="font-size: 1.3em">Connectivity</span>
+											</td>
+											<td>
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light">
+														{{ top_recommendation_connectivity }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light" style="aspect-ratio: 1;">
+														{{ connectivity }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													{% if top_recommendation_connectivity <= connectivity %}
+														<span class="border border-1 rounded p-3 bg-success fw-bold text-light">
+															<span style='font-size:1.3em;'>&#9733;</span>
+														</span>
+													{% else %}
+													<span class="border border-1 rounded p-3 bg-warning fw-bold text-light">
+														<span style='font-size: 1.3em; color: white; line-height: 1;'>&#9873;</span>
+													</span>
+													{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4">
+												<span class="text-wrap">{{ top_recommendation_connectivity_desc }}</span>
+												{% if top_recommendation_connectivity <= connectivity %}
+												<br><br>
+												<span class="text-success fw-bold text-wrap">This tool satisfies your requirements around connectivity.</span>
+												{% else %}
+												<br><br>
+												<span class="text-warning fw-bold text-wrap">This tool may be not adequately meet your connectivity needs.</span>
+												{% endif %}
+											</td>
+										</tr>
+										
+										<tr>
+											<td scope="row" class="align-middle h-100">
+												<span class="fw-bold" style="font-size: 1.3em">Data Cleaning</span>
+											</td>
+											<td>
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light">
+														{{ top_recommendation_data_cleaning }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light" style="aspect-ratio: 1;">
+														{{ data_cleaning }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													{% if top_recommendation_data_cleaning <= data_cleaning %}
+														<span class="border border-1 rounded p-3 bg-success fw-bold text-light">
+															<span style='font-size:1.3em;'>&#9733;</span>
+														</span>
+													{% else %}
+													<span class="border border-1 rounded p-3 bg-warning fw-bold text-light">
+														<span style='font-size: 1.3em; color: white; line-height: 1;'>&#9873;</span>
+													</span>
+													{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4">
+												<span class="text-wrap">{{ top_recommendation_data_cleaning_desc }}</span>
+												{% if top_recommendation_data_cleaning <= data_cleaning %}
+												<br><br>
+												<span class="text-success fw-bold text-wrap">This tool provides sufficient data cleaning features for your requirements.</span>
+												{% else %}
+												<br><br>
+												<span class="text-warning fw-bold text-wrap">This tool may be not adequately meet your data cleaning needs.</span>
+												{% endif %}
+											</td>
+										</tr>
+																				
+										<tr>
+											<td scope="row" class="align-middle h-100">
+												<span class="fw-bold" style="font-size: 1.3em">Data Visualization</span>
+											</td>
+											<td>
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light">
+														{{ top_recommendation_data_viz }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light" style="aspect-ratio: 1;">
+														{{ data_viz }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													{% if top_recommendation_data_viz <= data_viz %}
+														<span class="border border-1 rounded p-3 bg-success fw-bold text-light">
+															<span style='font-size:1.3em;'>&#9733;</span>
+														</span>
+													{% else %}
+													<span class="border border-1 rounded p-3 bg-warning fw-bold text-light">
+														<span style='font-size: 1.3em; color: white; line-height: 1;'>&#9873;</span>
+													</span>
+													{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4">
+												<span class="text-wrap">{{ top_recommendation_data_viz_desc }}</span>
+												{% if top_recommendation_data_viz <= data_viz %}
+												<br><br>
+												<span class="text-success fw-bold text-wrap">This tool provides sufficient data visualization features based on your requirements.</span>
+												{% else %}
+												<br><br>
+												<span class="text-warning fw-bold text-wrap">This tool may be not adequately meet your data visualization needs.</span>
+												{% endif %}
+											</td>
+										</tr>
+										
+										<tr>
+											<td scope="row" class="align-middle h-100">
+												<span class="fw-bold" style="font-size: 1.3em">Data Interoperability</span>
+											</td>
+											<td>
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light">
+														{{ top_recommendation_interoperability }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light" style="aspect-ratio: 1;">
+														{{ interoperability }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													{% if top_recommendation_interoperability <= interoperability %}
+														<span class="border border-1 rounded p-3 bg-success fw-bold text-light">
+															<span style='font-size:1.3em;'>&#9733;</span>
+														</span>
+													{% else %}
+													<span class="border border-1 rounded p-3 bg-warning fw-bold text-light">
+														<span style='font-size: 1.3em; color: white; line-height: 1;'>&#9873;</span>
+													</span>
+													{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4">
+												<span class="text-wrap">{{ top_recommendation_interoperability_desc }}</span>
+												{% if top_recommendation_interoperability <= interoperability %}
+												<br><br>
+												<span class="text-success fw-bold text-wrap">This tool stores data and allows it to be exported in a way that meets your data interoperability requirements</span>
+												{% else %}
+												<br><br>
+												<span class="text-warning fw-bold text-wrap">This tool may be not adequately meet your data interoperability needs.</span>
+												{% endif %}
+											</td>
+										</tr>
+										
+										<tr>
+											<td scope="row" class="align-middle h-100">
+												<span class="fw-bold" style="font-size: 1.3em">Localization</span>
+											</td>
+											<td>
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light">
+														{{ top_recommendation_localization }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light" style="aspect-ratio: 1;">
+														{{ localization }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													{% if top_recommendation_localization <= localization %}
+														<span class="border border-1 rounded p-3 bg-success fw-bold text-light">
+															<span style='font-size:1.3em;'>&#9733;</span>
+														</span>
+													{% else %}
+													<span class="border border-1 rounded p-3 bg-warning fw-bold text-light">
+														<span style='font-size: 1.3em; color: white; line-height: 1;'>&#9873;</span>
+													</span>
+													{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4">
+												<span class="text-wrap">{{ top_recommendation_localization_desc }}</span>
+												{% if top_recommendation_localization <= localization %}
+												<br><br>
+												<span class="text-success fw-bold text-wrap">This tool offers sufficient localization features based on your needs.</span>
+												{% else %}
+												<br><br>
+												<span class="text-warning fw-bold text-wrap">This tool may not adequately meet your localization needs, and require that you manually translate elements for your end users. </span>
+												{% endif %}
+											</td>
+										</tr>
+										
+										<tr>
+											<td scope="row" class="align-middle h-100">
+												<span class="fw-bold" style="font-size: 1.3em">Data Privacy</span>
+											</td>
+											<td>
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light">
+														{{ top_recommendation_data_privacy }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light" style="aspect-ratio: 1;">
+														{{ data_privacy }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													{% if top_recommendation_data_privacy <= data_privacy %}
+														<span class="border border-1 rounded p-3 bg-success fw-bold text-light">
+															<span style='font-size:1.3em;'>&#9733;</span>
+														</span>
+													{% else %}
+													<span class="border border-1 rounded p-3 bg-warning fw-bold text-light">
+														<span style='font-size: 1.3em; color: white; line-height: 1;'>&#9873;</span>
+													</span>
+													{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4">
+												<span class="text-wrap">{{ top_recommendation_data_privacy_desc }}</span>
+												{% if top_recommendation_data_privacy <= data_privacy %}
+												<br><br>
+												<span class="text-success fw-bold text-wrap">This tool has sufficient features related to data privacy based on your needs.</span>
+												{% else %}
+												<br><br>
+												<span class="text-warning fw-bold text-wrap">This tool may not adequately meet your localization needs, and require that you manually translate elements for your end users. </span>
+												{% endif %}
+											</td>
+										</tr>
+										
+										<tr>
+											<td scope="row" class="align-middle h-100">
+												<span class="fw-bold" style="font-size: 1.3em">Data Protection</span>
+											</td>
+											<td>
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light">
+														{{ top_recommendation_data_protection }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													<span class="border border-1 rounded p-3 bg-dark fw-bold text-light" style="aspect-ratio: 1;">
+														{{ data_protection }}
+													</span>
+												</div>
+											</td>
+											<td class="align-middle">
+												<div class="d-flex align-items-center justify-content-center h-100">
+													{% if top_recommendation_data_protection <= data_protection %}
+														<span class="border border-1 rounded p-3 bg-success fw-bold text-light">
+															<span style='font-size:1.3em;'>&#9733;</span>
+														</span>
+													{% else %}
+													<span class="border border-1 rounded p-3 bg-warning fw-bold text-light">
+														<span style='font-size: 1.3em; color: white; line-height: 1;'>&#9873;</span>
+													</span>
+													{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4">
+												<span class="text-wrap">{{ top_recommendation_data_protection_desc }}</span>
+												{% if top_recommendation_data_protection <= data_protection %}
+												<br><br>
+												<span class="text-success fw-bold text-wrap">This tool has sufficient features related to data privacy based on your needs.</span>
+												{% else %}
+												<br><br>
+												<span class="text-warning fw-bold text-wrap">This tool may not adequately meet your localization needs, and require that you manually translate elements for your end users. </span>
+												{% endif %}
+											</td>
+										</tr>
+										
 									</tbody>
 								</table>
 							</div>
