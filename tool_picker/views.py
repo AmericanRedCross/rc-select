@@ -48,7 +48,7 @@ def tool_selection_walkthrough(request):
             # save new instance to the database
             new_response.save()
             request.session['tool_picker_page'] = cleaned_data
-            return redirect('tool_picker_results')
+            return redirect('tool_picker_results', new_response.unique_id)
         # if the form is not valid, re-render the form with user input
         else:
             return render(request, 'tool_picker_page.html', {'form': form})
@@ -65,26 +65,59 @@ def edit_form_submission(request, unique_id):
         form = ToolSelectionForm(request.POST, instance=submission)
         if form.is_valid():
             form.save()
-            return redirect('success_url')  # Redirect to a success page.
+            return redirect('success_url')
     else:
         form = ToolSelectionForm(instance=submission)
     
     return render(request, 'edit_form_template.html', {'form': form})
 
-def tool_picker_results(request):
-    # load form id from user's session
-    submitted_form_id = request.session.get('submitted_form_id')
+def tool_picker_results(request, response_id):
+    top_recommendation = find_best_match(request, response_id)
+    top_recommendation_information = Tool.objects.get(name=top_recommendation.name)
     
     # send user to error page if no form found in their session
-    if not submitted_form_id: 
+    if not response_id: 
         return render(request, 'error_no_submitted_form.html')
     
     try:
-        response = ToolPickerResponses.objects.get(unique_id=submitted_form_id)
+        response = ToolPickerResponses.objects.get(unique_id=response_id)
         
         # bars multiplied by 25 for the percent-filled bars on the output page
         context = {
             'unique_id': response.unique_id,
+            'top_recommendation_name': top_recommendation_information.name,
+            'top_recommendation_description': top_recommendation_information.description,
+            'top_recommendation_setup_speed': top_recommendation_information.setup_speed,
+            'top_recommendation_setup_speed_desc': top_recommendation_information.setup_speed_desc,
+            'top_recommendation_setup_complexity': top_recommendation_information.setup_complexity,
+            'top_recommendation_setup_complexity_desc': top_recommendation_information.setup_complexity_desc,
+            'top_recommendation_maintenance_complexity': top_recommendation_information.maintenance_complexity,
+            'top_recommendation_maintenance_complexity_desc': top_recommendation_information.maintenance_complexity_desc,
+            'top_recommendation_training_and_support': top_recommendation_information.training_and_support,
+            'top_recommendation_training_and_support_desc': top_recommendation_information.training_and_support_desc,
+            'top_recommendation_transition': top_recommendation_information.transition,
+            'top_recommendation_transition_desc': top_recommendation_information.transition_desc,
+            'top_recommendation_performance': top_recommendation_information.performance,
+            'top_recommendation_performance_desc': top_recommendation_information.performance_desc,
+            'top_recommendation_connectivity': top_recommendation_information.connectivity,
+            'top_recommendation_connectivity_desc': top_recommendation_information.connectivity_desc,
+            'top_recommendation_data_cleaning': top_recommendation_information.data_cleaning,
+            'top_recommendation_data_cleaning_desc': top_recommendation_information.data_cleaning_desc,
+            'top_recommendation_data_viz': top_recommendation_information.data_viz,
+            'top_recommendation_data_viz_desc': top_recommendation_information.data_viz_desc,
+            'top_recommendation_data_management_policies': top_recommendation_information.data_management_policies,
+            'top_recommendation_data_management_policies_desc': top_recommendation_information.data_management_policies_desc,
+            'top_recommendation_interoperability': top_recommendation_information.interoperability,
+            'top_recommendation_interoperability_desc': top_recommendation_information.interoperability_desc,
+            'top_recommendation_localization': top_recommendation_information.localization,
+            'top_recommendation_localization_desc': top_recommendation_information.localization_desc,
+            'top_recommendation_data_privacy': top_recommendation_information.data_privacy,
+            'top_recommendation_data_privacy_desc': top_recommendation_information.data_privacy_desc,
+            'top_recommendation_data_protection': top_recommendation_information.data_protection,
+            'top_recommendation_data_protection_desc': top_recommendation_information.data_protection_desc,
+            'top_recommendation_cost': top_recommendation_information.cost,
+            'top_recommendation_cost_desc': top_recommendation_information.cost_desc,
+            
             'intended_use_type': response.intended_use_type,
             'available_budget': response.available_budget,
             'available_budget_bar': int(response.available_budget) * 25,
@@ -114,6 +147,7 @@ def tool_picker_results(request):
             'data_privacy_bar': int(response.data_privacy) * 25,
             'data_protection': response.data_protection, 
             'data_protection_bar': int(response.data_protection) * 25,
+            'top_recommendation': top_recommendation,
         }
         
         return render(request, 'tool_picker_results.html', context=context)
@@ -122,38 +156,91 @@ def tool_picker_results(request):
 
 def find_best_match(request, response_id):
     try:
-        # retrieve the single user response
+        # retrieve user response
         user_response = ToolPickerResponses.objects.get(unique_id=response_id)
     except ToolPickerResponses.DoesNotExist:
-        return render(request, 'error.html', {'message': 'Response not found'})
+        return render(request, 'error_no_submitted_form.html', {'message': 'Response not found'})
     
-    load_toolbox = Tool.objects.all()
+    # load all tools
+    toolbox = Tool.objects.all()
     
     best_match = None
-    lowest_difference_score = float('inf')  # start with a "worst" case scenario.
+    winning_score = -1000 # arbitrarily low number as placeholder
     
     # score each tool based on how well it matches the user's needs
-    for tool in load_toolbox:
-        budget_diff = abs(tool.cost - user_response.available_budget)
-        complexity_diff = abs(tool.setup_complexity - user_response.setup_complexity)
+    for tool in toolbox:
+        budget_diff = tool.cost - user_response.available_budget
+        print(f'{tool.name} budget difference: {budget_diff}')
+        
+        budget_score = score_response(budget_diff)
+        print(f'{tool.name} budget score: {budget_score}')
+        
+        setup_time_diff = tool.setup_speed - user_response.setup_time
+        print(f'{tool.name} setup speed difference: {setup_time_diff}')
+        
+        setup_time_score = score_response(setup_time_diff)
+        print(f'{tool.name} setup speed score: {setup_time_score}')
+        
+        setup_complexity_diff = tool.setup_speed - user_response.setup_complexity
+        print(f'{tool.name} setup complexity difference: {setup_complexity_diff}')
+        
+        setup_complexity_score = score_response(setup_complexity_diff)
+        print(f'{tool.name} setup complexity score: {setup_complexity_score}')
+        
+        maintenance_diff = tool.maintenance_complexity - user_response.maintenance
+        print(f'{tool.name} maintenance difference: {maintenance_diff}')
+        
+        maintenance_score = score_response(maintenance_diff)
+        print(f'{tool.name} maintenance score: {maintenance_score}')
+        
+        closeout_diff = tool.transition - user_response.closeout
+        print(f'{tool.name} closeout difference: {closeout_diff}')
+        
+        closeout_score = score_response(closeout_diff)
+        print(f'{tool.name} closeout score: {closeout_score}')
+
     
         # sum the differences to get a total "difference score"
-        total_difference = budget_diff + complexity_diff
-    
+        total_tool_score = budget_score + setup_time_score + setup_complexity_score + maintenance_score
+        print(f'{tool.name} TOTAL DIFFERENCE: {total_tool_score}')
+        
+        
         # if this tool is a better match than the previous best, remember it
-        if total_difference < lowest_difference_score:
+        if total_tool_score > winning_score:
             best_match = tool
-            lowest_difference_score = total_difference
+            winning_score = total_tool_score
     
     # check if a match was found
     if best_match is None:
         return render(request, 'error.html', {'message': 'No suitable tool found'})
     
-    print(best_match)
-    
-    # Pass the best match to the template.
-    return render(request, 'tool_picker_results.html', {'best_match': best_match})
+    # return the name of the best matching tool
+    return best_match
 
+def score_response(input_variable):
+    """
+    Takes in a variable from the selection framework, and scores it based on the difference against the tool.
+    The weighting exaggerates differences between the user's choice and the compared tool's attributes.
+    
+    Parameters:
+    input_variable (int): An integer between 3 and -3
+    
+    Returns:
+    int:Returning value as output_score
+    """
+    
+    if input_variable == 3:
+        output_score = -5
+    elif input_variable == 2:
+        output_score = -3
+    elif input_variable == 1:
+        output_score = -1
+    elif input_variable == 0:
+        output_score = 1
+    else:
+        output_score = 3
+    
+    return output_score
 
 def get_cost_data(request):
     if request.method == 'GET' and 'selected_value_budget' in request.GET:
