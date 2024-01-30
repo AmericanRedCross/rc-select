@@ -22617,6 +22617,13 @@ html[dir=rtl] .choices__input {
 /*User CSS*/
 /*# sourceMappingURL=style.css.map */
 
+.feature-header {
+  font-family: "Heebo", sans-serif;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--bs-heading-color);
+}
+
 .results-page-paragraph {
   font-size: 1.3em;
 }
@@ -22631,4 +22638,8 @@ html[dir=rtl] .choices__input {
 
 .large-select {
   font-size: 1.3em;
+}
+
+.white-icon {
+    color: white;
 }
