@@ -12,8 +12,15 @@ def home(request):
 def about(request):
     return render(request, "about.html")
     
-def tool_info(request):
-    return render(request, "tool-detail.html")
+def tool_info(request, tool_id):
+    tool = Tool.objects.get(id=tool_id)
+    
+    context = {
+        'tool_name': tool.name,
+        'tool_description': tool.description,
+    }
+    
+    return render(request, "tool-detail.html", context=context)
 
 def tool_selection_walkthrough(request):
     if request.method == 'POST':
