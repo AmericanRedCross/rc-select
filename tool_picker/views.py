@@ -3,8 +3,14 @@ import secrets
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 
-from .forms import ToolSelectionForm
+from .forms import ToolSelectionForm, UploadFileForm
 from .models import ToolAttributeDefinition, ToolPickerResponses, Tool
+from .utils import save_tool_image_to_s3
+
+import boto3
+from django.conf import settings
+from django.core.files.storage import default_storage
+from urllib.parse import quote_plus
 
 def home(request):
     return render(request, "index.html")
@@ -248,6 +254,21 @@ def score_response(input_variable):
         output_score = 3
     
     return output_score
+    
+def upload_tool_image(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            upload = request.FILES['file']
+            file_url = save_tool_image_to_s3(upload)
+            encoded_file_url = quote_plus(default_storage.url(file_url))  
+            return redirect('upload_success', file_url=encoded_file_url)  
+    else:
+        form = UploadFileForm()
+    return render(request, 'upload.html', {'form': form})
+
+def upload_success(request, file_url): 
+    return render(request, 'upload_success.html', {'file_url': file_url})
 
 def get_cost_data(request):
     if request.method == 'GET' and 'selected_value_budget' in request.GET:

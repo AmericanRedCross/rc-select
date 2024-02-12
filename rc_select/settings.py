@@ -10,6 +10,10 @@ load_dotenv(dotenv_path=env_path)
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'default_secret_key_if_not_found')
 
+AWS_STORAGE_BUCKET_NAME = 'rc-select'
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID', 'aws access key id not found')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', 'aws secret access key not found')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
