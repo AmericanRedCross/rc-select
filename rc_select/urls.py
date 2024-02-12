@@ -24,7 +24,7 @@ urlpatterns = [
     path('get_setup_time_data/', tool_picker_views.get_setup_time_data, name='get_setup_time_data'),
     path('get_setup_complexity_data/', tool_picker_views.get_setup_complexity_data, name='get_setup_complexity_data'),
     path('get_support_data/', tool_picker_views.get_support_data, name='get_support_data'),
-    path('tool/', tool_picker_views.tool_info, name='tool-info'),
+    path('tool/<int:tool_id>', tool_picker_views.tool_info, name='tool-info'),
     path('tool_selection/', tool_picker_views.tool_selection_walkthrough, name='tool_selection_begin'),
     path('tool_picker_results/<str:response_id>', tool_picker_views.tool_picker_results, name='tool_picker_results'),
 ]
