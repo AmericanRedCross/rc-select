@@ -117,6 +117,11 @@ class ToolAttributeDefinition(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     date_modified = models.DateTimeField(auto_now=True)
 
+class ToolFeature(models.Model):
+    name = models.CharField(max_length=200)
+    feature_category = models.CharField(default="None", max_length=300, null=False)
+    description = models.TextField(null=True)
+
 class Tool(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -220,6 +225,8 @@ class Tool(models.Model):
         MaxValueValidator(4, message="Cost cannot be greater than 4"),
         ])
     cost_desc = models.TextField(default="No description provided.")
+    
+    tool_features = models.ManyToManyField(ToolFeature, related_name='tool')
     
     date_added = models.DateTimeField(default=timezone.now)
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
