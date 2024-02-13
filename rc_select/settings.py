@@ -11,6 +11,7 @@ load_dotenv(dotenv_path=env_path)
 SECRET_KEY = os.getenv('SECRET_KEY', 'default_secret_key_if_not_found')
 
 AWS_STORAGE_BUCKET_NAME = 'rc-select'
+AWS_S3_REGION_NAME = 'us-east-1'
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID', 'aws access key id not found')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', 'aws secret access key not found')
 
