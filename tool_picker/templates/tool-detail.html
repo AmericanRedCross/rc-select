@@ -7,16 +7,16 @@ Page intro START -->
 		<div class="row py-2">
 			<div class="col-lg-8">
 				<!-- Title -->
-				<h1>RedRose</h1>
+				<h1>{{ tool_name }}</h1>
 				<!-- Badge -->
 				<div class="d-flex">
 					<div><h6 class="mb-3 font-base bg-danger text-white py-2 px-4 rounded-2 d-inline-block me-2">Cash Operations</h6></div>
 					<div><h6 class="mb-3 font-base bg-danger text-white py-2 px-4 rounded-2 d-inline-block">Beneficiary Data Management</h6></div>
 				</div>
-				<p>A fully-featured platform that can handle multiple phases of a cash operation, from registration to encashment to post-distribution monitoring.</p>
+				<p>{{ tool_description }}</p>
 				<!-- Content -->
 				<ul class="list-inline mb-0">
-					<li class="list-inline-item h6 me-3 mb-1 mb-sm-0"><i class="fas fa-star text-warning me-2"></i>12 Documented Examples</li>
+					<li class="list-inline-item h6 me-3 mb-1 mb-sm-0"><i class="fas fa-star text-warning me-2"></i>X Documented Examples</li>
 					<li class="list-inline-item h6 me-3 mb-1 mb-sm-0"><i class="fas fa-signal text-success me-2"></i>High Cost</li>
 					<li class="list-inline-item h6 mb-0"><i class="fas fa-globe text-info me-2"></i>English, Spanish, French, Arabic</li>
 				</ul>
@@ -337,7 +337,8 @@ Page content START -->
 						<!-- Video START -->
 						<div class="card shadow p-2 mb-4 z-index-9">
 							<div class="overflow-hidden rounded-3">
-								<img src="../static/assets/images/bg/redrose.png" class="card-img" alt="tool image">
+								<img src="https://{{tool_image_url}}" class="card-img" alt="tool image">
+								<!-- <img src="../static/assets/images/bg/redrose.png" class="card-img" alt="tool image"> -->
 							</div>
 		
 							<!-- Card body -->

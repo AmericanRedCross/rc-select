@@ -12,5 +12,8 @@ def save_tool_image_to_s3(uploaded_file):
         filename,
         ExtraArgs={'ACL': 'public-read'}  
     )
-    file_url = default_storage.url(filename)
-    return file_url
+    
+    # Construct the S3 URL directly
+    s3_url = f"{settings.AWS_STORAGE_BUCKET_NAME}.s3.{settings.AWS_S3_REGION_NAME}.amazonaws.com/{filename}"
+
+    return s3_url

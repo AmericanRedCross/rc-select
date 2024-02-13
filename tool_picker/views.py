@@ -1,16 +1,18 @@
 import secrets
+import json
+from urllib.parse import quote_plus, unquote_plus, urlencode
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
+from django.contrib import messages
+from django.conf import settings
+from django.core.files.storage import default_storage
 
 from .forms import ToolSelectionForm, UploadFileForm
 from .models import ToolAttributeDefinition, ToolPickerResponses, Tool
 from .utils import save_tool_image_to_s3
 
 import boto3
-from django.conf import settings
-from django.core.files.storage import default_storage
-from urllib.parse import quote_plus
 
 def home(request):
     return render(request, "index.html")
@@ -23,7 +25,9 @@ def tool_info(request, tool_id):
     
     context = {
         'tool_name': tool.name,
+        'tool_tagline': tool.tagline,
         'tool_description': tool.description,
+        'tool_image_url': tool.tool_image_url,
     }
     
     return render(request, "tool-detail.html", context=context)
@@ -254,21 +258,41 @@ def score_response(input_variable):
         output_score = 3
     
     return output_score
-    
-def upload_tool_image(request):
+
+def upload_tool_image(request, tool_id):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             upload = request.FILES['file']
             file_url = save_tool_image_to_s3(upload)
-            encoded_file_url = quote_plus(default_storage.url(file_url))  
-            return redirect('upload_success', file_url=encoded_file_url)  
+    
+            # pass as URL parameters to success route
+            redirect_url = f'/upload_tool_image/success/?encoded_file_url={file_url}&tool_id={tool_id}'
+            return redirect(redirect_url)
+    
     else:
         form = UploadFileForm()
+    
     return render(request, 'upload.html', {'form': form})
 
-def upload_success(request, file_url): 
-    return render(request, 'upload_success.html', {'file_url': file_url})
+def upload_success(request):
+    try:
+        # get the params from the query string
+        encoded_file_url = request.GET.get('encoded_file_url', '')
+        tool_id = request.GET.get('tool_id', '')
+    
+        # update specified row in the Tool model
+        try:
+            tool = Tool.objects.get(pk=tool_id)
+            tool.tool_image_url = encoded_file_url
+            tool.save()
+        except Tool.DoesNotExist:
+            return HttpResponse(f"Tool with ID {tool_id} does not exist")
+    
+    except Exception as e:
+        print(f"Error processing parameters: {e}")
+    
+    return HttpResponse(f"File URL Value: {encoded_file_url} saved to database for Tool ID {tool_id}")
 
 def get_cost_data(request):
     if request.method == 'GET' and 'selected_value_budget' in request.GET:
