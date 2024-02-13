@@ -124,7 +124,9 @@ class ToolFeature(models.Model):
 
 class Tool(models.Model):
     name = models.CharField(max_length=100)
+    tagline = models.TextField(max_length=300, default='No tagline provided')
     description = models.TextField()
+    tool_image_url = models.TextField(default='none')
     category = models.CharField(max_length=100, default='Uncategorized')
     case_management = models.BooleanField(default=False)
     case_management_desc = models.TextField(null=True)
