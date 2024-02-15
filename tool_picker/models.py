@@ -125,6 +125,12 @@ class ToolFeature(models.Model):
     def __str__(self):
         return self.name
 
+class ToolResource(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, null=True, default="No tool resource name specified.")
+    category = models.CharField(max_length=200, null=True, default="No tool category specified.")
+    url = models.URLField(max_length=400)
+
 class Tool(models.Model):
     name = models.CharField(max_length=100)
     tagline = models.TextField(max_length=300, default='No tagline provided')
@@ -232,6 +238,7 @@ class Tool(models.Model):
     cost_desc = models.TextField(default="No description provided.")
     
     tool_features = models.ManyToManyField(ToolFeature, related_name='tool')
+    tool_resources = models.ManyToManyField(ToolResource, related_name='tool')
     
     date_added = models.DateTimeField(default=timezone.now)
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -333,9 +340,3 @@ class ToolPickerResponses(models.Model):
     localization = models.IntegerField(default=0)
     data_privacy = models.IntegerField(default=0)
     data_protection = models.IntegerField(default=0)
-
-class ToolResource(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100, null=True, default="No tool resource name specified.")
-    category = models.CharField(max_length=200, null=True, default="No tool category specified.")
-    url = models.URLField(max_length=400)
