@@ -334,7 +334,7 @@ class ToolPickerResponses(models.Model):
     data_privacy = models.IntegerField(default=0)
     data_protection = models.IntegerField(default=0)
 
-class ToolResources(models.Model):
+class ToolResource(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, null=True, default="No tool resource name specified.")
     category = models.CharField(max_length=200, null=True, default="No tool category specified.")
