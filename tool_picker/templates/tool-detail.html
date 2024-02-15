@@ -13,7 +13,7 @@ Page intro START -->
 					<div><h6 class="mb-3 font-base bg-danger text-white py-2 px-4 rounded-2 d-inline-block me-2">Cash Operations</h6></div>
 					<div><h6 class="mb-3 font-base bg-danger text-white py-2 px-4 rounded-2 d-inline-block">Beneficiary Data Management</h6></div>
 				</div>
-				<p>{{ tool_description }}</p>
+				<p>{{ tool_tagline }}</p>
 				<!-- Content -->
 				<ul class="list-inline mb-0">
 					<li class="list-inline-item h6 me-3 mb-1 mb-sm-0"><i class="fas fa-star text-warning me-2"></i>X Documented Examples</li>
@@ -72,19 +72,9 @@ Page content START -->
 							<div class="tab-pane fade show active" id="tool-pills-1" role="tabpanel" aria-labelledby="tool-pills-tab-1">
 								<!-- Course detail START -->
 								<h5 class="mb-3">Tool Overview</h5>
-								<p class="mb-3">RedRose is an organization with offices in London, Dublin, Abuja, and İstanbul that develops a tool of the same name. Originally released in 2015, the tool has been deployed in several contexts around the world to support cash distribution operations run by various humanitarian actors. The tool has become a popular option in the Movement, including most recently in the Ukraine and Surrounding Countries Crisis. </p>
+								<p class="mb-3">{{ tool_description }}</p>
 								
-								<!-- List content -->
-								<h5 class="mt-4">Feature Overview</h5>
-								<ul class="list-group list-group-borderless mb-3">
-									<li class="list-group-item h6 fw-light d-flex mb-0"><i class="fas fa-check-circle text-success me-2"></i>FSP Integration</li>
-									<li class="list-group-item h6 fw-light d-flex mb-0"><i class="fas fa-check-circle text-success me-2"></i>Registration and Beneficiary Data Management</li>
-									<li class="list-group-item h6 fw-light d-flex mb-0"><i class="fas fa-check-circle text-success me-2"></i>User Profiles and Permissions</li>
-									<li class="list-group-item h6 fw-light d-flex mb-0"><i class="fas fa-check-circle text-success me-2"></i>Audit Controls</li>
-									<li class="list-group-item h6 fw-light d-flex mb-0"><i class="fas fa-check-circle text-success me-2"></i>Data Exports and Analytics</li>
-									<li class="list-group-item h6 fw-light d-flex mb-0"><i class="fas fa-check-circle text-success me-2"></i>Supports Multiple Modalities</li>
-									<li class="list-group-item h6 fw-light d-flex mb-0"><i class="fas fa-check-circle text-success me-2"></i>Data Privacy and Security</li>
-								</ul>
+								
 
 							</div>
 							<!-- Content END -->
@@ -92,12 +82,15 @@ Page content START -->
 							<!-- Content START -->
 							<div class="tab-pane fade" id="tool-pills-2" role="tabpanel" aria-labelledby="tool-pills-tab-2">
 								<!-- Feature accordion START -->
+
 								<div class="accordion accordion-icon accordion-bg-light" id="featureAccordion">
+									
+									{% for feature in tool_features %}
 									<!-- Item -->
 									<div class="accordion-item mb-3">
 										<h6 class="accordion-header font-base" id="feature-1">
 											<button class="accordion-button fw-bold rounded d-sm-flex d-inline-block collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-												Registration and Beneficiary Data Management 
+												{{ feature.name }} 
 											</button>
 										</h6>
 										<div id="collapse-1" class="accordion-collapse collapse show" aria-labelledby="feature-1" data-bs-parent="#featureAccordion">
@@ -106,112 +99,16 @@ Page content START -->
 												<div class="d-flex justify-content-between align-items-center">
 													<div class="position-relative d-flex align-items-center">
 														
-														<span class="d-inline-block  ms-2 mb-0 h6 fw-light ">The tool integrates with an Open Data Kit (ODK)-based application called RRCollection, which includes many of the features that make ODK so popular, including offline collection, GPS-tagged records, and more. The data that gets collected during registration can be processed with selection criteria, providing real-time perspective on who qualifies. Duplicate checks are possible across a number of datapoints, including biometrics.</span>
+														<span class="d-inline-block  ms-2 mb-0 h6 fw-light ">{{ feature.description }}</span>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
+									{% endfor %}
 									
-									<!-- Item -->
-									<div class="accordion-item mb-3">
-										<h6 class="accordion-header font-base" id="heading-1">
-											<button class="accordion-button fw-bold rounded d-sm-flex d-inline-block collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="true" aria-controls="collapse-2">
-												Financial Services Integration 
-											</button>
-										</h6>
-										<div id="collapse-2" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#featureAccordion">
-											<div class="accordion-body mt-3">
-												<!-- Tool Feature -->
-												<div class="d-flex justify-content-between align-items-center">
-													<div class="position-relative d-flex align-items-center">
-														
-														<span class="d-inline-block  ms-2 mb-0 h6 fw-light ">RedRose offers a number of tools that help manage cash transfers from financial services providers, including out-of-the-box integrations with mobile money operators. The tool supports account verification, which uses a beneficiary’s data to validate bank account information. </span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
 									
-									<!-- Item -->
-									<div class="accordion-item mb-3">
-										<h6 class="accordion-header font-base" id="heading-1">
-											<button class="accordion-button fw-bold rounded d-sm-flex d-inline-block collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-3" aria-expanded="true" aria-controls="collapse-3">
-												User Profiles and Permission Sets 
-											</button>
-										</h6>
-										<div id="collapse-3" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#featureAccordion">
-											<div class="accordion-body mt-3">
-												<!-- Tool Feature -->
-												<div class="d-flex justify-content-between align-items-center">
-													<div class="position-relative d-flex align-items-center">
-														
-														<span class="d-inline-block  ms-2 mb-0 h6 fw-light ">Team members added to an instance of RedRose in a cash operation can be assigned specific permission sets which can be fully customized based on the team’s structure. These permissions also facilitate approvals for authorizing transfers. </span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
 									
-									<!-- Item -->
-									<div class="accordion-item mb-3">
-										<h6 class="accordion-header font-base" id="heading-1">
-											<button class="accordion-button fw-bold rounded d-sm-flex d-inline-block collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-4" aria-expanded="true" aria-controls="collapse-4">
-												Support for Multiple Modalities 
-											</button>
-										</h6>
-										<div id="collapse-4" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#featureAccordion">
-											<div class="accordion-body mt-3">
-												<!-- Tool Feature -->
-												<div class="d-flex justify-content-between align-items-center">
-													<div class="position-relative d-flex align-items-center">
-														
-														<span class="d-inline-block  ms-2 mb-0 h6 fw-light ">RedRose can be configured to support several different workflows and forms of cash transfer. In addition to mobile money and direct account transfers, it can also support e-vouchers and physical cards. These cards and vouchers can be topped up via multiple tranches, and support security features like PINs, biometrics, and more. </span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									<!-- Item -->
-									<div class="accordion-item mb-3">
-										<h6 class="accordion-header font-base" id="heading-1">
-											<button class="accordion-button fw-bold rounded d-sm-flex d-inline-block collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-5" aria-expanded="true" aria-controls="collapse-5">
-												Data Exports and Analytics 
-											</button>
-										</h6>
-										<div id="collapse-5" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#featureAccordion">
-											<div class="accordion-body mt-3">
-												<!-- Tool Feature -->
-												<div class="d-flex justify-content-between align-items-center">
-													<div class="position-relative d-flex align-items-center">
-														
-														<span class="d-inline-block  ms-2 mb-0 h6 fw-light ">RedRose offers native data analytics, as well as the ability to extract raw data for teams to conduct their own analysis. There are a number of standard reports that RedRose can generate, including merchant reports that capture reconciliation, transaction summaries, account balances; participant reports covering distribution lists, balances, and post-distribution monitoring (PDM); and market overviews that show program teams information about commodity prices, market distortion, and more. RedRose support teams can build custom report types upon request, and can help connect their database with your own analytics platforms.</span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									<!-- Item -->
-									<div class="accordion-item mb-3">
-										<h6 class="accordion-header font-base" id="heading-1">
-											<button class="accordion-button fw-bold rounded d-sm-flex d-inline-block collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-6" aria-expanded="true" aria-controls="collapse-6">
-												Data Privacy and Security
-											</button>
-										</h6>
-										<div id="collapse-6" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#featureAccordion">
-											<div class="accordion-body mt-3">
-												<!-- Tool Feature -->
-												<div class="d-flex justify-content-between align-items-center">
-													<div class="position-relative d-flex align-items-center">
-														
-														<span class="d-inline-block  ms-2 mb-0 h6 fw-light ">On top of standard username and password pairs, the tool also offers two-factor authentication via SMS or time-based tokens. Cash cards are secured with chips and can be read with near field communication (NFC) chips. Centralized device management also means RedRose can implement additional security features on Android devices, including those that prevent enumerators from utilizing any apps or tools beyond the RedRose apps. The tool is GDPR-compliant, and uses full SSL for all data in transit. Audit logs save all interactions for full transparency.</span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
 
 
 								</div>
