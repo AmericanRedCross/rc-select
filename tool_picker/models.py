@@ -121,6 +121,9 @@ class ToolFeature(models.Model):
     name = models.CharField(max_length=200)
     feature_category = models.CharField(default="None", max_length=300, null=False)
     description = models.TextField(null=True)
+    
+    def __str__(self):
+        return self.name
 
 class Tool(models.Model):
     name = models.CharField(max_length=100)
