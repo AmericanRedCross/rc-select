@@ -22,12 +22,14 @@ def about(request):
     
 def tool_info(request, tool_id):
     tool = Tool.objects.get(id=tool_id)
+    tool_features = tool.tool_features.all()
     
     context = {
         'tool_name': tool.name,
         'tool_tagline': tool.tagline,
         'tool_description': tool.description,
         'tool_image_url': tool.tool_image_url,
+        'tool_features': tool_features,
     }
     
     return render(request, "tool-detail.html", context=context)
