@@ -26,7 +26,7 @@ urlpatterns = [
     path('get_support_data/', tool_picker_views.get_support_data, name='get_support_data'),
     path('tool/<int:tool_id>', tool_picker_views.tool_info, name='tool-info'),
     path('tool_selection/', tool_picker_views.tool_selection_walkthrough, name='tool_selection_begin'),
-    path('tool_picker_results/<str:response_id>', tool_picker_views.tool_picker_results, name='tool_picker_results'),
-    path('upload_tool_image/<int:tool_id>', tool_picker_views.upload_tool_image, name='upload_tool_image'),
+    path('tool_picker_results/<str:response_id>/', tool_picker_views.tool_picker_results, name='tool_picker_results'),
+    path('upload_tool_image/<int:tool_id>/', tool_picker_views.upload_tool_image, name='upload_tool_image'),
     path('upload_tool_image/success/', tool_picker_views.upload_success, name='upload_success'),
 ]
