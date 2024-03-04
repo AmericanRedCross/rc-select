@@ -119,11 +119,13 @@ class ToolAttributeDefinition(models.Model):
 
 class ToolFeature(models.Model):
     CATEGORY_CHOICES = (
-        ('financial', 'Financial'),
-        ('data_collection', 'Data Collection'),
-        ('data_security', 'Data Security'),
-        ('data_management', 'Data Management'),
-        ('reporting_and_visualization', 'Reporting and Visualization')
+        ('configuration', 'Configuration'),
+        ('beneficiary_registration', 'Beneficiary Registration'),
+        ('distribution_planning_and_scheduling', 'Distribution Planning and Scheduling'), 
+        ('distribution_tracking', 'Distribution Tracking'), 
+        ('feedback_and_surveys', 'Feedback and Surveys'), 
+        ('data_management', 'Data Management'), 
+        ('reporting_and_analytics', 'Reporting and Analytics')
     )
     
     name = models.CharField(max_length=200)
@@ -131,7 +133,7 @@ class ToolFeature(models.Model):
     description = models.TextField(null=True)
     
     def __str__(self):
-        return self.name
+        return f"{self.feature_category} - {self.name}"
 
 class ToolResource(models.Model):
     CATEGORY_CHOICES = (
@@ -142,8 +144,8 @@ class ToolResource(models.Model):
     )
     
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100, null=True, default="No tool resource name specified.")
-    category = models.CharField(max_length=200, choices=CATEGORY_CHOICES, null=True, default="No tool category specified.")
+    name = models.CharField(max_length=100, null=True)
+    category = models.CharField(max_length=200, choices=CATEGORY_CHOICES, null=True)
     url = models.URLField(max_length=400)
     
     def __str__(self):
@@ -161,18 +163,9 @@ class Tool(models.Model):
     name = models.CharField(max_length=100)
     tagline = models.TextField(max_length=300, default='No tagline provided')
     description = models.TextField()
-    tool_image_url = models.TextField(default='none')
+    tool_image_url = models.TextField(default='rc-select.s3.us-east-1.amazonaws.com/default_tool_icon.png')
     category = models.CharField(max_length=100, default='Uncategorized')
-    case_management = models.BooleanField(default=False)
-    case_management_desc = models.TextField(null=True)
-    fsp_integration = models.BooleanField(default=False)
-    fsp_integration_desc = models.TextField(null=True)
-    sms = models.BooleanField(default=False)
-    sms_desc = models.TextField(null=True)
-    biometrics = models.BooleanField(default=False)
-    biometrics_desc = models.TextField(null=True)
-    customized_workflows = models.BooleanField(default=False)
-    customized_workflows_desc = models.TextField(null=True)
+    
     setup_speed = models.IntegerField(default=0, validators=[
             MinValueValidator(0, message="Setup speed cannot be less than 0"),
             MaxValueValidator(4, message="Setup speed cannot be greater than 4"),
