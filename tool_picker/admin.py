@@ -12,7 +12,9 @@ class ToolAdmin(admin.ModelAdmin):
             url = "/upload_tool_image/{}/".format(obj.id) 
             return format_html(f'<a href="{url}" target="_blank">Click to upload a new tool icon.</a>')
         else:
-            return "Can't upload image."
+            return "Can't upload image yet - save the tool first then return to this page."
+    
+    filter_horizontal = ('tool_resources','languages', 'tool_features')
 
 # admin.site.register(Tool)
 admin.site.register(ToolAttributeDefinition)
