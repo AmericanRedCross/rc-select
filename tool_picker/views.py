@@ -138,6 +138,7 @@ def tool_picker_results(request, response_id):
             'top_recommendation_data_protection_desc': top_recommendation_information.data_protection_desc,
             'top_recommendation_cost': top_recommendation_information.cost,
             'top_recommendation_cost_desc': top_recommendation_information.cost_desc,
+            'top_recommendation_image_url': top_recommendation_information.tool_image_url,
             
             'intended_use_type': response.intended_use_type,
             'available_budget': response.available_budget,
