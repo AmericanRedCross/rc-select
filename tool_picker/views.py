@@ -9,7 +9,7 @@ from django.conf import settings
 from django.core.files.storage import default_storage
 
 from .forms import ToolSelectionForm, UploadFileForm
-from .models import ToolAttributeDefinition, ToolPickerResponses, Tool, ToolResource
+from .models import ToolAttributeDefinition, ToolPickerResponses, Tool, ToolResource, Language
 from .utils import save_tool_image_to_s3
 
 import boto3
@@ -24,6 +24,7 @@ def tool_info(request, tool_id):
     tool = Tool.objects.get(id=tool_id)
     tool_features = tool.tool_features.all()
     tool_resources = tool.tool_resources.all()
+    tool_languages = tool.languages.all()
     
     context = {
         'tool_name': tool.name,
@@ -32,6 +33,8 @@ def tool_info(request, tool_id):
         'tool_image_url': tool.tool_image_url,
         'tool_features': tool_features,
         'tool_resources': tool_resources,
+        'tool_cost': tool.cost,
+        'tool_languages': tool_languages,
     }
     
     return render(request, "tool-detail.html", context=context)
