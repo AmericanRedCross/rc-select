@@ -9,16 +9,23 @@ Page intro START -->
 				<!-- Title -->
 				<h1>{{ tool_name }}</h1>
 				<!-- Badge -->
-				<div class="d-flex">
-					<div><h6 class="mb-3 font-base bg-danger text-white py-2 px-4 rounded-2 d-inline-block me-2">Cash Operations</h6></div>
-					<div><h6 class="mb-3 font-base bg-danger text-white py-2 px-4 rounded-2 d-inline-block">Beneficiary Data Management</h6></div>
-				</div>
+				
 				<p>{{ tool_tagline }}</p>
 				<!-- Content -->
 				<ul class="list-inline mb-0">
 					<li class="list-inline-item h6 me-3 mb-1 mb-sm-0"><i class="fas fa-star text-warning me-2"></i>X Documented Examples</li>
-					<li class="list-inline-item h6 me-3 mb-1 mb-sm-0"><i class="fas fa-signal text-success me-2"></i>High Cost</li>
-					<li class="list-inline-item h6 mb-0"><i class="fas fa-globe text-info me-2"></i>English, Spanish, French, Arabic</li>
+					{% if tool_cost == 4 %}
+						<li class="list-inline-item h6 me-3 mb-1 mb-sm-0"><i class="fas fa-signal text-danger me-2"></i>High Cost</li>
+					{% elif tool_cost == 3  %}
+						<li class="list-inline-item h6 me-3 mb-1 mb-sm-0"><i class="fas fa-signal text-warning me-2"></i>Medium Cost</li>
+					{% else %}
+						<li class="list-inline-item h6 me-3 mb-1 mb-sm-0"><i class="fas fa-signal text-success me-2"></i>Low Cost</li>
+					{% endif %}
+					<li class="list-inline-item h6 mb-0"><i class="fas fa-globe text-info me-2"></i>
+						{% for language in tool_languages %}
+							{{language.language}}
+						{% endfor %}
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -73,9 +80,6 @@ Page content START -->
 								<!-- Course detail START -->
 								<h5 class="mb-3">Tool Overview</h5>
 								<p class="mb-3">{{ tool_description }}</p>
-								
-								
-
 							</div>
 							<!-- Content END -->
 
@@ -106,10 +110,6 @@ Page content START -->
 										</div>
 									</div>
 									{% endfor %}
-									
-									
-									
-
 
 								</div>
 								<!-- Course accordion END -->
@@ -126,9 +126,20 @@ Page content START -->
 								
 								<!-- Instructor info -->
 								<h5 class="mb-3">Official Documentation</h5>
-								<p class="mb-3">Insert information and links to existing official documentation here. </p>
-								<h5 class="mb-3">Third Party Resources</h5>
-								<p class="mb-3">Training resources, user forums, etc.</p>
+								{% for resource in tool_resources %}
+									{% if resource.category == 'first_party_documentation' %}
+										<button class="btn btn-danger mb-3 me-3" style="color: white">
+											<a href="{{resource.url}}" style="color: inherit; text-decoration: none;">{{ resource.name }}</a>
+										</button>
+									{% endif %}
+								{% endfor %}
+
+								
+								
+								<h5 class="mt-5 mb-3">Third Party Resources</h5>
+								{% for resource in tool_resources %}
+								{{ resource.name }}
+								{% endfor %}
 							</div>
 							<!-- Content END -->
 
@@ -273,19 +284,7 @@ Page content START -->
 					<div class="col-md-6 col-lg-12">
 
 
-						<!-- Tags START -->
-						<div class="card card-body shadow p-4">
-							<h4 class="mb-3">Tool Feature Tags</h4>
-							<ul class="list-inline mb-0">
-								<li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">FSP integration</a> </li>
-								<li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">registration</a> </li>
-								<li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">digital cash</a> </li>
-								<li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">biometrics</a> </li>
-								<li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">data cleaning</a> </li>
-								
-							</ul>
-						</div>	
-						<!-- Tags END -->
+						
 					</div>
 				</div><!-- Row End -->
 			</div>
