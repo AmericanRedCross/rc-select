@@ -82,11 +82,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'rcselectstagingdb',
         'USER': 'rcselectstagingdb_user',
-        'PASSWORD': os.getenv('DB_PASSWORD', 'db_password_not_found'),
-        'HOST': os.getenv('DB_HOSTNAME', 'db_hostname_not_found'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'db_pass_missing'),
+        'HOST': os.getenv('DB_HOSTNAME', 'db_host_missing'),
         'PORT': '5432',
     }
 }
+
 
 
 
