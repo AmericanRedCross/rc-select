@@ -16,9 +16,12 @@ AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID', 'aws access key id not found'
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', 'aws secret access key not found')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['rc-select.onrender.com']
+ALLOWED_HOSTS = [
+    'rc-select.onrender.com',
+    '127.0.0.1'
+]
 
 # Application definition
 
