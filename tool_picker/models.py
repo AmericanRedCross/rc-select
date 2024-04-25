@@ -121,8 +121,7 @@ class ToolFeature(models.Model):
     CATEGORY_CHOICES = (
         ('configuration', 'Configuration'),
         ('beneficiary_registration', 'Beneficiary Registration'),
-        ('distribution_planning_and_scheduling', 'Distribution Planning and Scheduling'), 
-        ('distribution_tracking', 'Distribution Tracking'), 
+        ('distribution_management', 'Distribution Management'),
         ('feedback_and_surveys', 'Feedback and Surveys'), 
         ('data_management', 'Data Management'), 
         ('reporting_and_analytics', 'Reporting and Analytics')
@@ -131,6 +130,7 @@ class ToolFeature(models.Model):
     name = models.CharField(max_length=200)
     feature_category = models.CharField(default="None", choices=CATEGORY_CHOICES, max_length=300, null=False)
     description = models.TextField(null=True)
+    cash_RTM_code = models.CharField(null=True, max_length=40)
     
     def __str__(self):
         return f"{self.feature_category} - {self.name}"
