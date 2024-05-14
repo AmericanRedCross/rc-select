@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 env_path = BASE_DIR / '.env'
 load_dotenv(dotenv_path=env_path)
@@ -71,16 +70,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rc_select.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+CSRF_TRUSTED_ORIGINS = ['https://rc-select.onrender.com']
 
 DATABASES = {
     'default': {
