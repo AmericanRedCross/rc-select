@@ -75,7 +75,7 @@ CSRF_TRUSTED_ORIGINS = ['https://rc-select.onrender.com']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'rcselectstagingdb',
+        'NAME': 'rcselectstagingdb_2cpp',
         'USER': 'rcselectstagingdb_user',
         'PASSWORD': os.getenv('DB_PASSWORD', 'db_pass_missing'),
         'HOST': os.getenv('DB_HOSTNAME', 'db_host_missing'),
@@ -122,7 +122,12 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# allocate compressed static file storage per render docs (https://docs.render.com/deploy-django)
+
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
