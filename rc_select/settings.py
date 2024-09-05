@@ -19,7 +19,7 @@ AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', 'aws secret access ke
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'rc-select.onrender.com',
+    'rc-select-app.onrender.com',
     '127.0.0.1'
 ]
 
@@ -70,7 +70,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rc_select.wsgi.application'
 
-CSRF_TRUSTED_ORIGINS = ['https://rc-select.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://rc-select-app.onrender.com']
 
 DATABASES = {
     'default': {
