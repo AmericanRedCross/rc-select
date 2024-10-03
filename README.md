@@ -39,3 +39,6 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
+# Loading data
+
+There is a sample set of data in the `seed_data` subdirectory that can be loaded directly to the database tables via your favorite SQL tool (e.g. DBeaver). Please note that this sample data is incomplete and is provided to help illustrate potential capabilities of the tool.
