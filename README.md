@@ -42,3 +42,16 @@ python manage.py runserver
 # Loading data
 
 There is a sample set of data in the `seed_data` subdirectory that can be loaded directly to the database tables via your favorite SQL tool (e.g. DBeaver). Please note that this sample data is incomplete and is provided to help illustrate potential capabilities of the tool.
+
+Following is a good order to load the tables:
+
+1. tool_picker_language.csv
+2. tool_picker_tool.csv
+3. tool_picker_tool_languages.csv
+4. tool_picker_toolfeature.csv
+5. tool_picker_tool_tool_features.csv
+6. tool_picker_toolresource.csv
+7. tool_picker_tool_tool_resources.csv
+8. tool_picker_tool_tool_resources.csv
+9. tool_picker_toolattributedefinition.csv
+10. tool_picker_toolpickerresponses.csv
