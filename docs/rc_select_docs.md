@@ -6,7 +6,7 @@
 - [Accessing the Adminsitrative Interface](#accessing-the-administrative-interface)
 - [Adding a New Tool](#adding-a-new-tool)
 - [Modifying Tool Selection Criteria](#modifying-tool-selection-criteria)
-- [Glossary](#glossary)
+
 
 ## Overview
 RC-Select is a django-based web application developed by Jonathan Garro with the American Red Cross to help teams understand the various data management tools that can be used in disaster assessment and response. RC-Select allows users to view information about various data management tools and their capabilities. RC-Select also provides a guided selection process that will recommend tools based on user-supplied characteristics about their project, budget, technical skills and data needs.
