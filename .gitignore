@@ -27,7 +27,7 @@ generate_password_hash.py
 .Python
 build/
 develop-eggs/
-dist/
+#dist/ commented out to allw static bootstrap - t1j
 downloads/
 eggs/
 .eggs/
